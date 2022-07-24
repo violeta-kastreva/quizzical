@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Quizzical</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="A new design system for developing with less effort.">
+    <meta name="author" content="BootstrapBay">
+
+    <link href="/static/img/logo.png" rel="icon" type="image/png">
+    
+    <link rel="stylesheet" href="/static/vendor/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/css/lazy.css">
+		<link rel="stylesheet" href="/static/css/demo.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+  </head>
+  <body class="index">
+    <div class="component">
+        <form method="get" class="form-subscribe form-inline my-4">
+            Search by:
+            <select id="select" class="btn btn-light mt-0 mt-md-3 mt-lg-0 ml-2 mr-3" name="searchCriteria">
+                <option value="Name" >event name</option>
+                <option value="QuizName" >quiz name</option>
+            </select>
+            <div class="form-group flex-grow-1">
+                <label class="sr-only" for="email4">Email</label>
+                <input id="input" type="text" class="form-control flex-grow-1 mr-2"
+                       placeholder="Enter name here..." name="searchText" value="@Model.SearchString">
+                <button type="submit" id="search" class="btn btn-primary mt-0 mt-md-3 mt-lg-0">Search</button>
+            </div>
+        </form>
+    </div>
+<div class="col-md-12 mb-4">
+    <div class="card">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-info p-2">
+            <div class="container pl-0">
+                <h5 class="mb-0 p-2 text-white">All Pending Events</h5>
+            </div>
+        </nav>
+        <div class="card-body p-0">
+            <table class="table table-hover col-12 mb-0">
+                <thead>
+                    <tr class="table-active bg-white">
+                        <th scope="col">Event</th>
+                        <th scope="col">Quiz</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">From/To</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr class="table-info">
+                            <th scope="row" class="pt-3">_event.Name</th>
+                            <th scope="row" class="pt-3">_event.QuizName</th>
+                            <th scope="row" class="pt-3">_event.Date</th>
+                            <th scope="row" class="pt-3">_event.Duration</th>
+                        </tr>
+  
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    <div class="text-center mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @disabledLeftArrow">
+                <a class="page-link"
+                  >
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                </a>
+            </li>
+         
+             
+                <li class="page-item @active">
+                    <a class="page-link"
+                    >i</a>
+                </li>
+          
+            <li class="page-item @disabledRightArrow">
+                <a class="page-link"
+                  >
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <li class="nav-item">
+        <a class="btn btn-outline-white ml-2"  title="Manage">
+            <i class="fas fa-address-card"></i>  Profile
+        </a>
+    </li>
+
+    <li class="nav-item text-primary">
+        <form class="form-inline">
+            <button type="submit" class="btn btn-outline-white ml-2">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </form>
+    </li>
+
+</body>
+</html>

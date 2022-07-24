@@ -1,0 +1,71 @@
+﻿
+<div class="col-md-10 mb-4 ml-md-5">
+    <div class="component">
+        <form method="get" class="form-subscribe form-inline mb-4" >
+            Search by:
+            <select id="select" class="btn btn-light mt-0 mt-md-3 mt-lg-0 ml-2 mr-3" name="searchCriteria">
+                <option value="Name" >name</option>
+            </select>
+            <div class="form-group flex-grow-1">
+                <label class="sr-only" for="email4">Email</label>
+                <input id="input" type="text" class="form-control flex-grow-1 mr-2"
+                       placeholder="Choose criteria and type to search..." name="searchText" value="@Model.SearchString">
+                <button type="submit" id="search" class="btn btn-primary mt-0 mt-md-3 mt-lg-0">Search</button>
+            </div>
+        </form>
+    </div>
+    <div class="component">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-circle text-success"></i> Results for:
+            </div>
+            <div class="card-body p-0 mt-2">
+                <h4 class="card-title pl-3">All Active Events</h4>
+                <table class="table table-hover col-12 mt-2 mb-0">
+                    <tbody>
+                       
+                            <tr class="table-success">
+                                <th scope="row" class="pt-3">_event.Name</th>
+                                <th scope="row" class="pt-3 text-center"></th>
+                                <td class="text-right">
+                                    <a type="submit" class="btn btn-outline-success py-1"
+                                       >
+                                        View Results
+                                    </a>
+                                </td>
+                            </tr>
+                        
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+        <div class="text-center mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @disabledLeftArrow">
+                    <a class="page-link"
+                     >
+                        <i class="fas fa-long-arrow-alt-left"></i>
+                    </a>
+                </li>
+              
+                    <li class="page-item @active">
+                        <a class="page-link"
+                           >
+                            i
+                        </a>
+                    </li>
+                
+                <li class="page-item @disabledRightArrow">
+                    <a class="page-link"
+                     >
+                        <i class="fas fa-long-arrow-alt-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    
+</div>
+
