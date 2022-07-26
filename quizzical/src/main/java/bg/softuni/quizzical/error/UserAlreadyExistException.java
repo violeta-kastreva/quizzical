@@ -1,4 +1,4 @@
-package app.error;
+package bg.softuni.quizzical.error;
 
 public final class UserAlreadyExistException extends RuntimeException {
 

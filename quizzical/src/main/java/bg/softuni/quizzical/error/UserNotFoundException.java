@@ -1,5 +1,4 @@
-package app.error;
-
+package bg.softuni.quizzical.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
