@@ -10,7 +10,6 @@ public class Question extends BaseEntity{
     @Column(nullable = false)
     private String text;
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "quizzes_id")
     private Quiz quiz;

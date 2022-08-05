@@ -49,7 +49,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .csrf().csrfTokenRepository(this.csrfTokenRepository())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/css/**", "/images/**", "/fonts/**", "/js/**", "/scss/**").permitAll()
+                .antMatchers("/css/**", "/images/**", "/img/**",  "/vendor/**", "/fonts/**", "/js/**", "/scss/**").permitAll()
                 .antMatchers("/",
                         "/error",
                         "/about",
@@ -57,6 +57,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                         "/users/login",
                         "/v2/api-docs",
                         "/swagger-ui.html").permitAll()
+                .antMatchers("/hometeacher", "/createquiz", "/createquestion", "/creategroup").hasRole("TEACHER")
+                .antMatchers("/homestudent").hasRole("STUDENT")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -65,7 +67,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .loginPage("/users/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/default")
+                .permitAll()
                 .and()
                 .rememberMe()
                 .key("devUniSecret")

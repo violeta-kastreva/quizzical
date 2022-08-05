@@ -8,14 +8,11 @@ import java.util.Set;
 @Table(name = "quizzes")
 public class Quiz extends BaseEntity{
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String caption;
 
     @Column(nullable = false)
     private LocalDate dueDate;
-
-    @Column(nullable = false)
-    private int duration;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "school_classes_id")

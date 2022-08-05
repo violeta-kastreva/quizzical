@@ -36,4 +36,4 @@ spring:
   #api-key:
   #api-secret:
   #cloud-name:
-
+debug: true

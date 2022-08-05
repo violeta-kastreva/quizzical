@@ -2,10 +2,12 @@ package bg.softuni.quizzical.web.controller;
 
 import bg.softuni.quizzical.error.UserAlreadyExistException;
 import bg.softuni.quizzical.model.service.UserDTO;
+import bg.softuni.quizzical.model.service.UserRegistrationDTO;
 import bg.softuni.quizzical.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.management.relation.RoleNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Collection;
 
 @Controller
 @RequestMapping("/users")
@@ -33,7 +36,7 @@ public class UserController {
                         Model model,
                         HttpServletRequest httpServletRequest) {
         if (!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
-            return "redirect:/home";
+            return "redirect:/default";
         }
 
         if (error != null) {
@@ -41,8 +44,7 @@ public class UserController {
             model.addAttribute("exceptionMessage", exceptionMessage);
         }
 
-
-        return "users/login";
+        return "views/users/login";
     }
 
     private String getErrorMessage(HttpServletRequest httpServletRequest, String key) {
@@ -65,26 +67,26 @@ public class UserController {
             return "redirect:/home";
         }
         if (!model.containsAttribute("userRegisterBindingModel")) {
-            model.addAttribute("userRegisterBindingModel", new UserDTO());
+            model.addAttribute("userRegisterBindingModel", new UserRegistrationDTO());
         }
-        return "/users/register";
+        return "views/users/register";
     }
 
     @PostMapping("/register")
     @PreAuthorize("isAnonymous()")
-    public String registerConfirm(@Valid @ModelAttribute("userRegisterBindingModel") UserDTO userRegisterBindingModel
+    public String registerConfirm(@Valid @ModelAttribute("userRegisterBindingModel") UserRegistrationDTO userRegisterBindingModel
             , BindingResult bindingResult
             , RedirectAttributes redirectAttributes) {
 
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
-            redirectAttributes.addFlashAttribute(String.format("userRegisterBindingModel"), bindingResult);
+            redirectAttributes.addFlashAttribute(String.format( "result"+"userRegisterBindingModel"), bindingResult);
             return "redirect:/users/register";
         }
         try {
-            System.out.println();
-            userService.registerNewUserAccount(this.modelMapper.map(userRegisterBindingModel, UserDTO.class));
+
+            userService.registerNewUserAccount(this.modelMapper.map(userRegisterBindingModel, UserRegistrationDTO.class));
         } catch (UserAlreadyExistException | RoleNotFoundException e) {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("exceptionMessage", e.getMessage());

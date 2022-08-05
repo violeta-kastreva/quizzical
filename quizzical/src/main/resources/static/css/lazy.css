@@ -11,7 +11,7 @@
 }
 
 .bg-primary {
-    background-color: #4A154B !important
+    background-color: #072AC8 !important
 }
 
 .bg-secondary {
@@ -172,8 +172,8 @@
 }
 
     .btn-primary:not(:disabled):hover, .btn-primary:not(:disabled):focus, .btn-primary:not(:disabled):active, .btn-primary:not(:disabled).active, .btn-primary:not(:disabled):active:focus, .btn-primary:not(:disabled):active:hover, .btn-primary:not(:disabled).active:focus, .btn-primary:not(:disabled).active:hover, .show > .btn-primary:not(:disabled).dropdown-toggle, .show > .btn-primary:not(:disabled).dropdown-toggle:focus, .show > .btn-primary:not(:disabled).dropdown-toggle:hover {
-        background-color: #4b1852;
-        border: 1px solid #4b1852;
+        background-color: #041562;
+        border: 1px solid #041562;
         box-shadow: none
     }
 
@@ -484,7 +484,7 @@ a.text-primary {
 }
 
     a.text-primary:hover {
-        color: #4b1852 !important
+        color: #041562 !important
     }
 
 .form-control, .custom-select, .custom-file {
@@ -896,7 +896,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .noUi-value-vertical {
     -webkit-transform: translate(0, -50%);
-    transform: translate(0, -50%, 0);
+    transform: translate(0, -50%);
     padding-left: 25px
 }
 
@@ -2116,7 +2116,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     }
 
 .dropdown-toggle:focus {
-    box-shadow: 0 none
+    box-shadow: none;
 }
 
 .dropdown-menu {
@@ -2204,7 +2204,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 .footer-1 {
-    padding: 2rem 0rem 1rem position: absolute;
+    padding: 2rem 0rem 1rem; position: absolute;
     bottom: 0;
     width: 100%;
     /*height: 2.5rem;*/ /* Footer height */

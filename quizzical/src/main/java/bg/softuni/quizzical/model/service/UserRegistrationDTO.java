@@ -6,10 +6,11 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
-public class UserDTO {
+public class UserRegistrationDTO {
     @NotBlank(message = "First name is required")
     private String firstName;
 
@@ -28,17 +29,7 @@ public class UserDTO {
     @Length(min = 3, max = 25,  message = "Password must be between 3 and 25  characters.")
     private String confirmPassword;
 
-    private Set<Role> authorities;
-
-    public Set<Role> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<Role> authorities) {
-        this.authorities = authorities;
-    }
-
-
+    private String authority;
 
     public String getFirstName() {
         return firstName;
@@ -80,15 +71,11 @@ public class UserDTO {
         this.confirmPassword = confirmPassword;
     }
 
-    public UserDTO(@NotBlank(message = "First name is required") String firstName, @NotBlank(message = "Last name is required") String lastName, @NotNull @Email(message = "Email must be valid") String email, @NotNull @Length(min = 3, max = 25, message = "Password must be between 3 and 25 least 3 characters.") String password, @NotNull @Length(min = 3, max = 25, message = "Password must be between 3 and 25  characters.") String confirmPassword, Set<Role> authorities) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.authorities = authorities;
+    public String getAuthority() {
+        return authority;
     }
 
-    public UserDTO() {
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 }

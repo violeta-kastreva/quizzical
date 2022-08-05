@@ -1,0 +1,198 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8">
+    <title>Quizzical</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="A new design system for developing with less effort.">
+    <meta name="author" content="BootstrapBay">
+
+    <link href="/img/logo.png" rel="icon" type="image/png">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="/css/lazy.css" rel="stylesheet">
+    <link href="/css/demo.css" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
+          integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" rel="stylesheet">
+</head>
+<body class="index" data-new-gr-c-s-check-loaded="14.1071.0" data-gr-ext-installed="">
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-white">
+        <a class="navbar-brand text-primary ml-4" href="/Administration">
+            QuizHut
+        </a>
+        <button class="navbar-toggler collapsed bg-primary" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-7" aria-controls="navbarNavDropdown-7" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown-7">
+            <ul class="navbar-nav ml-auto mx-2">
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary ml-2" title="Manage" href="/Identity/Account/Manage">
+                        <i class="fas fa-address-card"></i>
+                        Profile
+                    </a>
+                </li>
+                <li class="nav-item text-primary">
+                    <form class="form-inline" action="/Identity/Account/Logout?returnUrl=%2F" method="post">
+                        <button type="submit" class="btn btn-outline-primary ml-2">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Dgdl0Inw3NFo_uXWyBLYsgpGCAJvUJpiQfni3kESFvsU126_UZTXtkT1JyPLq_jIbSGD_PzLWeVPORlj_JHcIwjBcUHFBWn002hHE4mPU_akdO04Zfc3vhvu-u20--UVlOCHn4X8wyXiUjOB0LVF01ie3-XFteohTK5cl9RX9uhC4arQ72b6YyZhBgn6mt0Aw"></form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<main id="page-container" role="main" class="pt-5">
+    <div class="row" id="content-wrap">
+        <div class="bubbles d-none d-md-block">
+            <!-- 				bubbles -->
+
+            <div class="bubble bubble-2 bubble-bottom-right bg-danger rotate-bubble"></div>
+            <div class="bubble bubble-3 bubble-top-right bg-warning rotate-bubble"></div>
+            <div class="bubble bubble-5 bg-info rotate-bubble"></div>
+            <div class="bubble bubble-6 bg-warning rotate-bubble"></div>
+            <div class="bubble bubble-7 bubble-top-right bg-danger rotate-bubble"></div>
+            <div class="bubble bubble-8 bubble-top-right bg-danger rotate-bubble"></div>
+            <div class="bubble bubble-9 bg-warning rotate-bubble"></div>
+            <div class="bubble bubble-10 bg-warning rotate-bubble"></div>
+            <div class="bubble bubble-11 bg-info rotate-bubble"></div>
+            <div class="bubble bubble-12 bubble-top-right bg-success rotate-bubble"></div>
+
+            <div class="bubble bubble-13 bubble-top-left bg-success rotate-bubble"></div>
+            <!--         circles -->
+            <div class="circle circle-1 bg-light rotate-circle"></div>
+            <div class="circle circle-2 bg-success rotate-circle"></div>
+            <div class="circle circle-3 bg-danger rotate-circle"></div>
+            <div class="circle circle-4 bg-info rotate-circle"></div>
+            <div class="circle circle-5 bg-info rotate-circle"></div>
+            <div class="circle circle-6 bg-info rotate-circle"></div>
+            <div class="circle circle-7 bg-warning rotate-circle"></div>
+            <div class="circle circle-8 bg-white rotate-circle"></div>
+            <div class="circle circle-9 bg-warning rotate-circle"></div>
+            <div class="circle circle-10 bg-danger rotate-circle"></div>
+        </div>
+
+
+
+        <div id="side-bar" class="col-12 col-md-2 border-right ml-2">
+            <ul class="navbar-nav text-center">
+                <li class="nav-item active">
+                    <form class="mb-2">
+                        <button class="btn btn-primary manage-account-btn" formaction="/Administration">Home</button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form class="my-2">
+                        <button class="btn btn-primary manage-account-btn" formaction="/Administration/Results">Results</button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form class="my-2">
+                        <button class="btn btn-primary manage-account-btn" formaction="/Administration/Events/AllEventsCreatedByTeacher">Events</button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form class="my-2">
+                        <button class="btn btn-primary manage-account-btn" formaction="/Administration/Groups/AllGroupsCreatedByTeacher">Groups</button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form class="my-2">
+                        <button class="btn btn-primary manage-account-btn" formaction="/Administration/Categories/AllCategoriesCreatedByTeacher">Categories</button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form class="my-2">
+                        <button class="btn btn-primary manage-account-btn" formaction="/Administration/Quizzes/AllQuizzesCreatedByTeacher">Quizzes</button>
+                    </form>
+                </li>
+                <li class="nav-item active">
+                    <form class="my-2">
+                        <button class="btn btn-primary manage-account-btn" formaction="/Administration/Students/AllStudentsAddedByTeacher">Students</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col-12 col-md-9 ml-md-5">
+
+            <div class="col-12 offset-md-1 col-md-8 row">
+                <form th:action="@{/creategroup}" th:method="POST" th:object="${groupCreateBindingModel}">
+<!--                    <div class="component"th:object="${students}">-->
+                        <div class="card mb-3 mt-3">
+                            <div class="card-header text-warning" style="font-size: xx-large">
+                                <i class="fas fa-folder-plus"></i>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Create Group</h4>
+
+                            </div>
+                            <div class="card-footer pb-5">
+                                <div class="input-group">
+                                    <input type="text"  th:errorclass="alert-danger" th:field="*{name}" class="form-control" placeholder="Enter name for the group." data-val="true" data-val-length="The Name must be at least 2 and at max 50 characters long." data-val-length-max="50" data-val-length-min="2" data-val-required="The Name field is required." id="Name" maxlength="50" name="Name" value="">
+                                </div>
+                                <p class="card-text text-primary ">
+                                    <span class="mr-1">∗</span>
+                                    Name should be unique*
+                                </p>
+                                 <div class="card-body" >
+                                    <h4 class="card-title">Assign Students</h4>
+<!--                                    <input type="hidden" value="7fdaaa00-3215-44ef-8e01-c0a3bb4edd3d" id="Id" name="Id">-->
+                                </div>
+                                <div class="card-footer">
+                                    <div class="component">
+                                        <div class="form-group mb-0">
+                                            <div class="mt-2" th:each="student: ${students}">
+                                                <input  th:value="${student.email}" name="students[]" class="check-box" data-val="true" data-val-required="The IsAssigned field is required." type="checkbox" value="true">
+                                                <h6 class="d-inline-block mt-0 ml-1"> <span class="ml-2"><th:block th:text="${student.firstName}">{firstName}</th:block> <th:block th:text="${student.lastName}">{lastName}</th:block> -  <th:block th:text="${student.email}">{email}</th:block> </span></h6>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-1 text-white">
+                                    <button id="addQuestion" type="submit" class="btn btn-primary col-md-5 mt-5">Add Group</button>
+                                    <div class="col-1 mr-4"></div>
+                                    <a id="cancel" class="btn btn-primary col-md-5 mt-5" href="/Administration">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+<!--                    </div>-->
+            </div>
+
+
+        </div>
+    </div>
+</main>
+
+
+
+<footer class="footer-1 bg-light text-dark pt-2">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="copyright text-center">
+                <p class="small mb-0">© 2020, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by MiraDask</p>
+            </div>
+            <div class="links">
+                <ul class="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
+                    <li>
+                        <a href="/Administration">
+                            Home
+                        </a>
+                    </li>
+                    <li><a href="/Home/Privacy">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+</body></html>

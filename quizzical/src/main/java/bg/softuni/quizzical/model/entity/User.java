@@ -7,12 +7,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity implements UserDetails{
+
+    public User() {
+        this.classes = new HashSet<>();
+    }
 
     @Column(nullable = false)
     private String firstName;
@@ -29,7 +34,7 @@ public class User extends BaseEntity implements UserDetails{
     private String password;
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_classes",
             joinColumns = @JoinColumn(name = "users_id"),
@@ -37,7 +42,7 @@ public class User extends BaseEntity implements UserDetails{
     )
     private Set<SchoolClass> classes;
 
-    @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
     private Set<Role> authorities;
 
 
