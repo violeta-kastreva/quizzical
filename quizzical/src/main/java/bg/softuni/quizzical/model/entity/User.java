@@ -19,6 +19,15 @@ public class User extends BaseEntity implements UserDetails{
         this.classes = new HashSet<>();
     }
 
+    public User(String firstName, String lastName, @Email String email, @Length(min = 3, message = "Password must be at least 3 characters.") String password, Set<Role> authorities) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+        this.classes = new HashSet<>();
+    }
+
     @Column(nullable = false)
     private String firstName;
 

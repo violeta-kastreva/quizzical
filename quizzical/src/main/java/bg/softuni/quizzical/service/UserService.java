@@ -26,6 +26,8 @@ public interface UserService {
 
     List<UserDTO> findAllByRole(String role);
 
+    void seedUsersInDb() throws RoleNotFoundException;
+
 
 
 

@@ -9,4 +9,6 @@ public interface SchoolClassService {
 
 
     List<SchoolClassDTO> findAllByEmail(String email);
+
+    void seedGroupsInDb();
 }

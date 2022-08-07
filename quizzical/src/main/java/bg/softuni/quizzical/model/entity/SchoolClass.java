@@ -10,13 +10,12 @@ import java.util.Set;
 @Table(name = "school_classes")
 public class SchoolClass extends BaseEntity{
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "classes", fetch = FetchType.EAGER)
     private Set<User> users;
 
-    //TODO change all to collection as wanted
     @OneToMany(mappedBy = "schoolClass", fetch = FetchType.EAGER)
     private Set<Quiz> quizzes;
 
@@ -49,7 +48,12 @@ public class SchoolClass extends BaseEntity{
         this.quizzes = new HashSet<>();
     }
 
-//    @OneToMany
+    public SchoolClass(String name, Set<User> users) {
+        this.name = name;
+        this.users = users;
+    }
+
+    //    @OneToMany
 //    private List<User> students;
 
 //    @ManyToOne

@@ -36,23 +36,26 @@ public class SchoolClassServiceImpl implements SchoolClassService {
     public SchoolClassDTO createSchoolClass(SchoolClassDTO map, String userEmail) {
         SchoolClass schoolClass = new SchoolClass();
         schoolClass.setName(map.getName());
-        map.getStudents().forEach(s->{
-            User student = this.userRepository.findFirstByEmail(s).get();
-            schoolClass.getUsers().add(student);
-        });
+//        map.getStudents().forEach(s->{
+//            User student = this.userRepository.findFirstByEmail(s).get();
+//            schoolClass.getUsers().add(student);
+//        });
 
         //User user = this.modelMapper.map(this.userService.findByEmail(userEmail), User.class);
+
         User user = this.userRepository.findFirstByEmail(userEmail).get();
         user.getClasses().add(schoolClass);
 
-       // this.userRepository.updateClasses(userEmail, (Set<SchoolClass>) user.getClasses());
-        this.userRepository.save(user);
-        this.schoolClassRepository.save(schoolClass);
+      //  this.userRepository.save(user);
+        schoolClass.getUsers().add(user);
+
+
         map.getStudents().forEach(s->{
             User student = this.userRepository.findFirstByEmail(s).get();
             student.getClasses().add(schoolClass);
-            this.userRepository.save(student);
         });
+
+        this.schoolClassRepository.save(schoolClass);
         return map;
     }
 
@@ -63,6 +66,34 @@ public class SchoolClassServiceImpl implements SchoolClassService {
         return allByUser.stream()
                 .map(schoolClass -> modelMapper.map(schoolClass, SchoolClassDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void seedGroupsInDb() {
+        if(this.schoolClassRepository.count()==0){
+
+            SchoolClass schoolClass1 = new SchoolClass("Group1",
+                    Set.of(this.userRepository.findFirstByEmail("student@student.com").get(),
+                            this.userRepository.findFirstByEmail("student2@student.com").get(),
+                            this.userRepository.findFirstByEmail("teacher@teacher.com").get()));
+            this.schoolClassRepository.save(schoolClass1);
+            schoolClass1.getUsers().forEach(s->{
+                s.getClasses().add(schoolClass1);
+                this.userRepository.save(s);
+            });
+
+            SchoolClass schoolClass2 = new SchoolClass("Group2",
+                    Set.of(this.userRepository.findFirstByEmail("student@student.com").get(),
+                            this.userRepository.findFirstByEmail("student3@student.com").get(),
+                            this.userRepository.findFirstByEmail("student4@student.com").get(),
+                            this.userRepository.findFirstByEmail("teacher@teacher.com").get()));
+            this.schoolClassRepository.save(schoolClass2);
+            schoolClass2.getUsers().forEach(s->{
+                s.getClasses().add(schoolClass1);
+                this.userRepository.save(s);
+            });
+        }
     }
 
 

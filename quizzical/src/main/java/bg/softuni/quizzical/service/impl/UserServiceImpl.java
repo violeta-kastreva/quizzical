@@ -155,4 +155,34 @@ public class UserServiceImpl implements UserService, UserDetailsService{
                 })
                 .map(u->this.modelMapper.map(u, UserDTO.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public void seedUsersInDb() throws RoleNotFoundException {
+        if(this.userRepository.count()==0){
+            this.userRepository.save(
+                    new User("Teacher", "Teacher", "teacher@teacher.com",
+                            bCryptPasswordEncoder.encode("teacher"),
+                            Set.of(this.roleService.findAuthorityByName("ROLE_TEACHER"))));
+
+            this.userRepository.save(
+                    new User("Student1", "Student", "student@student.com",
+                            bCryptPasswordEncoder.encode("student"),
+                            Set.of(this.roleService.findAuthorityByName("ROLE_STUDENT"))));
+
+            this.userRepository.save(
+                    new User("Student2", "Student", "student2@student.com",
+                            bCryptPasswordEncoder.encode("student"),
+                            Set.of(this.roleService.findAuthorityByName("ROLE_STUDENT"))));
+
+            this.userRepository.save(
+                    new User("Student3", "Student", "student3@student.com",
+                            bCryptPasswordEncoder.encode("student"),
+                            Set.of(this.roleService.findAuthorityByName("ROLE_STUDENT"))));
+
+            this.userRepository.save(
+                    new User("Student4", "Student", "student4@student.com",
+                            bCryptPasswordEncoder.encode("student"),
+                            Set.of(this.roleService.findAuthorityByName("ROLE_STUDENT"))));
+        }
+    }
 }

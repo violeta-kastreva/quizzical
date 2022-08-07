@@ -23,7 +23,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-white">
         <a class="navbar-brand text-primary ml-4" href="/Administration">
-            QuizHut
+            Quizzical
         </a>
         <button class="navbar-toggler collapsed bg-primary" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-7" aria-controls="navbarNavDropdown-7" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -136,38 +136,58 @@
                                     <h4 class="card-title">Quiz Details</h4>
                                     <p class="card-text">
                                         <span class="text-primary mr-1"></span>
-
                                     </p>
                                 </div>
                                 <div class="card-footer pb-5">
-                                    <div><label for="Name">Name</label></div>
+                                    <div><label for="name">Name</label></div>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="name" data-val="true" data-val-length="The Name must be at least 3 and at max 1000 characters long." data-val-length-max="1000" data-val-length-min="3" data-val-required="The Name field is required." id="Name" maxlength="1000" name="Name" value="">
+                                        <input type="text" id="name" th:errorclass="alert-danger" th:field="*{caption}" class="form-control" placeholder="name" data-val="true" data-val-length="The Name must be at least 3 and at max 30 characters long.">
                                     </div>
-                                    <label for="group" class="col-sm-2 col-form-label">Group</label>
+                                    <label for="schoolClassName" class="col-sm-2 col-form-label">Group</label>
                                     <div class="dropdown">
-                                        <button class="form-control dropdown-toggle"  type="button" id="group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Group
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
+
+                                        <select class="form-control" id="schoolClassName"  th:field="*{schoolClassName}">
+                                            <option th:each="group : ${groups}"
+                                                    th:value="${group.name}"
+                                                    th:text="${group.name}"></option>
+                                        </select>
                                     </div>
 
-                                    <label for="created" class="col-sm-2 col-form-label">Created date</label>
+                                    <label for="duedate" class="col-sm-2 col-form-label">Due date</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="created"
+                                        <input type="date" class="form-control" id="duedate" th:field="*{dueDate}"
+                                               th:errorclass="is-invalid"
                                                aria-describedby="createdHelpInline">
                                         <small id="createdTimeHelpInline" class="invalid-feedback bg-danger text-light rounded">
-                                            Created date cannot be in the future.
+                                            Created date cannot be in the past.
                                         </small>
                                     </div>
+
+                                    <label for="points" class="col-sm-2 col-form-label">Answers count</label>
+
+                                    <div class="dropdown">
+
+                                        <select class="form-control btn btn-outline-primary" id="count"  th:field="*{answerCount}">
+                                            <option th:each="i:${answersDropdown}" class="dropdown-item" th:value="${i}" th:text="${i}"></option>
+
+                                        </select>
+                                    </div>
+                                    <span class="text-danger"></span>
+
+                                    <label for="points" class="col-sm-2 col-form-label">Questions count</label>
+
+                                    <div class="dropdown">
+
+                                        <select class="form-control btn btn-outline-primary" id="points" th:field="*{questionsCount}">
+                                            <option th:each="i:${questionsDropdown}" class="dropdown-item" th:value="${i}" th:text="${i}"></option>
+
+                                        </select>
+                                    </div>
+
                                     <div class="row mx-4 text-white">
                                         <button id="addQuiz" type="submit" class="btn btn-primary col-md-5 mt-5">Add Questions...</button>
                                         <div class="col-1 mr-4"></div>
-                                        <a href="/Administration/Quizzes/AllQuizzesCreatedByTeacher" class="btn btn-primary col-md-5 mt-5">Cancel</a>
+                                        <a class="btn btn-primary col-md-5 mt-5">Cancel</a>
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +208,7 @@
     <div class="container">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="copyright text-center">
-                <p class="small mb-0">© 2020, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by MiraDask</p>
+                <p class="small mb-0">© 2022, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by VKastreva</p>
             </div>
             <div class="links">
                 <ul class="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
@@ -197,7 +217,7 @@
                             Home
                         </a>
                     </li>
-                    <li><a href="/Home/Privacy">Privacy</a></li>
+                    <li></li>
                 </ul>
             </div>
         </div>
