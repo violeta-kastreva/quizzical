@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -81,15 +82,18 @@ public class QuizController {
             List<QuestionDTO> questionDTOS = new ArrayList<>();
             for (int i = 0; i < Integer.parseInt(questionsCount) ; i++) {
                 QuestionDTO questionDTO = new QuestionDTO();
+                questionDTO.setText("");
                 questionDTO.setQuizName(quizName);
                 for (int j = 0; j < Integer.parseInt(answerCount) ; j++) {
                     AnswerDTO answerDTO = new AnswerDTO();
+                    answerDTO.setContent("");
+
                     questionDTO.getAnswers().add(answerDTO);
                 }
                 questionDTOS.add(questionDTO);
             }
             model.addAttribute("questionCreateBindingModel", questionDTOS);
-            model.addAttribute("questionsCreateBindingModel", questionDTOS);
+
         }
         model.addAttribute("pointsDropdown", this.questionService.loadPoints());
 
@@ -98,9 +102,9 @@ public class QuizController {
 
     @PostMapping("/createquestion")
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    public String createQuestion(@Valid @ModelAttribute("questionCreateBindingModel") Set<QuestionDTO> questionCreateBindingModel,
+    public String createQuestion(@RequestParam("questionCreateBindingModel") List<QuestionDTO> questionCreateBindingModel,
                                     BindingResult bindingResult,
-                                    RedirectAttributes redirectAttributes, @RequestParam String quizName) {
+                                    RedirectAttributes redirectAttributes) {
 
         //questionCreateBindingModel.setQuizName(quizName);
         if (bindingResult.hasErrors()) {

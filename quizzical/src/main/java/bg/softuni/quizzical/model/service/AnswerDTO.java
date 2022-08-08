@@ -7,13 +7,9 @@ public class AnswerDTO {
 
     private boolean isCorrectAnswer;
 
-    private String questionId;
+
 
     public AnswerDTO() {
-    }
-
-    public AnswerDTO(String questionId) {
-        this.questionId = questionId;
     }
 
     public String getContent() {

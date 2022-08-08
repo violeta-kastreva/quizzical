@@ -12,15 +12,16 @@ public class QuestionDTO {
     private String text;
 
     public QuestionDTO() {
-        this.answers = new ArrayList<>();
     }
+
+
 
 
     private String quizName;
 
     private int points;
 
-    private List<AnswerDTO> answers;
+    private List<AnswerDTO> answers = new ArrayList<>();
 
     public List<AnswerDTO> getAnswers() {
         return answers;
