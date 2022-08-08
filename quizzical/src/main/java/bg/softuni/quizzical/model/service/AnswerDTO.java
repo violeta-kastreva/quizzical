@@ -20,11 +20,11 @@ public class AnswerDTO {
         this.content = content;
     }
 
-    public boolean isCorrectAnswer() {
+    public boolean getIsCorrectAnswer() {
         return isCorrectAnswer;
     }
 
-    public void setCorrectAnswer(boolean correctAnswer) {
+    public void setIsCorrectAnswer(boolean correctAnswer) {
         isCorrectAnswer = correctAnswer;
     }
 }

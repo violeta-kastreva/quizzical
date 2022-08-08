@@ -1,23 +1,29 @@
 package bg.softuni.quizzical.service.impl;
 
+import bg.softuni.quizzical.model.entity.Answer;
 import bg.softuni.quizzical.model.entity.Question;
 import bg.softuni.quizzical.model.entity.Quiz;
+import bg.softuni.quizzical.model.service.AnswerDTO;
 import bg.softuni.quizzical.model.service.QuestionDTO;
+import bg.softuni.quizzical.repository.AnswerRepository;
 import bg.softuni.quizzical.repository.QuestionRepository;
 import bg.softuni.quizzical.repository.QuizRepository;
 import bg.softuni.quizzical.service.QuestionService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
     private final QuestionRepository questionRepository;
     private final QuizRepository quizRepository;
+    private final AnswerRepository answerRepository;
 
-    public QuestionServiceImpl(QuestionRepository questionRepository, QuizRepository quizRepository) {
+    public QuestionServiceImpl(QuestionRepository questionRepository, QuizRepository quizRepository, AnswerRepository answerRepository) {
         this.questionRepository = questionRepository;
         this.quizRepository = quizRepository;
+        this.answerRepository = answerRepository;
     }
 
 
@@ -52,5 +58,34 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public String getQuizName(String questionId) {
         return this.questionRepository.findById(Long.parseLong(questionId)).get().getQuiz().getCaption();
+    }
+
+    @Override
+    @Transactional
+    public void addQuestions(List<QuestionDTO> questionDTOList) {
+        Quiz quiz = quizRepository.findFirstByCaption(questionDTOList.get(0).getQuizName()).get();
+
+        for (QuestionDTO questionDTO: questionDTOList) {
+            Question question = new Question();
+            question.setText(questionDTO.getText());
+            question.setPoints(questionDTO.getPoints());
+
+            question.setQuiz(quiz);
+            quiz.getQuestions().add(question);
+            this.questionRepository.save(question);
+
+            for (AnswerDTO answerDTO: questionDTO.getAnswers()) {
+                Answer answer = new Answer();
+                answer.setCorrectAnswer(answerDTO.getIsCorrectAnswer());
+                answer.setContent(answerDTO.getContent());
+
+                answer.setQuestion(question);
+                question.getAnswers().add(answer);
+                this.answerRepository.save(answer);
+            }
+
+
+
+        }
     }
 }

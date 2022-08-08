@@ -124,10 +124,9 @@
 
             <div class="col-12 offset-md-2 col-md-8 row">
 
-
                 <form id="form" th:method="post" class="col-12" th:action="@{/createquestion}" th:object="${questionCreateBindingModel}">
                     <div class="component">
-                        <th:block  th:each="question: ${questionCreateBindingModel}">
+                        <th:block  th:each="question, ind: *{questionDTOS}">
                             <div class="card mb-3">
                                 <div class="card-header text-warning" style="font-size: xx-large">
                                     <i class="fas fa-folder-plus"></i>
@@ -142,9 +141,9 @@
                                 <div class="card-footer pb-5">
                                     <div><label for="Name">Name</label></div>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="name"  th:value="${question.text}" th:field="${question.text}" id="Name" value="">
+                                        <input type="text" class="form-control" placeholder="name"  th:value="*{questionDTOS[__${ind.index}__].text}" th:field="*{questionDTOS[__${ind.index}__].text}" id="Name" value="">
                                     </div>
-                                    <input type="hidden" th:value="${question.quizName}">
+                                    <input type="hidden" th:value="${question.quizName}" th:field="*{questionDTOS[__${ind.index}__].quizName}" >
 
                                     <span class="text-danger"></span>
 
@@ -152,7 +151,7 @@
 
                                     <div class="dropdown">
 
-                                        <select class="form-control btn btn-outline-primary" id="points" th:value="${question.points}">
+                                        <select class="form-control btn btn-outline-primary" id="points" th:field="*{questionDTOS[__${ind.index}__].points}">
                                             <option th:each="i:${pointsDropdown}" class="dropdown-item" th:value="${i}" th:text="${i}"></option>
 
                                         </select>
@@ -177,16 +176,19 @@
                                             <span class="text-primary mr-1"></span>
                                         </p>
                                     </div>
-                                    <div class="card-footer pb-5" th:each="answer:${question.answers}">
+                                    <!--                                    <div th:text="*{questionDTOS[__${ind.index}__].answers[0]}"></div>-->
+                                    <div class="card-footer pb-5" th:each="answer, ind2:${question.answers}">
+<!--                                        <div th:text="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].isCorrectAnswer}"></div>-->
                                         <div>
                                             <div><label for="answer">Answer option:</label></div>
                                             <div class="input-group" id="answer">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
-                                                        <input type="radio" aria-label="Radio button for following text input" th:value="${answer.isCorrectAnswer}">
+                                                        <input type="checkbox" aria-label="Radio button for following text input" th:checked="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].isCorrectAnswer}" th:field="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].isCorrectAnswer}">
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control" aria-label="Text input with radio button" th:value="${answer.content}">
+                                                <input type="text" class="form-control" aria-label="Text input with radio button" th:value="${answer.content}"
+                                                       th:field="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].content}">
                                             </div>
                                         </div>
                                     </div>

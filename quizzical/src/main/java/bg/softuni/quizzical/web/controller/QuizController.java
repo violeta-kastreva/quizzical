@@ -74,11 +74,28 @@ public class QuizController {
 
     */
 
-
+    private class ListContainer {
+        private List<QuestionDTO> questionDTOS;
+        public ListContainer() {
+            questionDTOS = new ArrayList<>();
+        }
+        public List<QuestionDTO> getQuestionDTOS() {
+            return questionDTOS;
+        }
+        public void setQuestionDTOS(List<QuestionDTO> questionDTOS) {
+            this.questionDTOS = questionDTOS;
+        }
+    }
 
     @GetMapping("/createquestion")
     public String createQuestion(Model model, @RequestParam String quizName, @RequestParam String answerCount, @RequestParam String questionsCount){
-        if (!model.containsAttribute("questionCreateBindingModel")) {
+        if (
+//                !model.containsAttribute("questionCreateBindingModel")
+                model.getAttribute("questionCreateBindingModel") == null ||
+//                        ((List<QuestionDTO>)model.getAttribute("questionCreateBindingModel")).isEmpty()
+                        ((ListContainer)model.getAttribute("questionCreateBindingModel")).getQuestionDTOS().isEmpty()
+        ) {
+//        ) {
             List<QuestionDTO> questionDTOS = new ArrayList<>();
             for (int i = 0; i < Integer.parseInt(questionsCount) ; i++) {
                 QuestionDTO questionDTO = new QuestionDTO();
@@ -92,7 +109,9 @@ public class QuizController {
                 }
                 questionDTOS.add(questionDTO);
             }
-            model.addAttribute("questionCreateBindingModel", questionDTOS);
+            ListContainer listContainer = new ListContainer();
+            listContainer.setQuestionDTOS(questionDTOS);
+            model.addAttribute("questionCreateBindingModel",listContainer);
 
         }
         model.addAttribute("pointsDropdown", this.questionService.loadPoints());
@@ -100,11 +119,11 @@ public class QuizController {
         return "views/teachers/createquestion";
     }
 
-    @PostMapping("/createquestion")
+    @PostMapping(value = "/createquestion", consumes = "application/x-www-form-urlencoded")
     @PreAuthorize("hasRole('ROLE_TEACHER')")
-    public String createQuestion(@RequestParam("questionCreateBindingModel") List<QuestionDTO> questionCreateBindingModel,
-                                    BindingResult bindingResult,
-                                    RedirectAttributes redirectAttributes) {
+    public String createQuestion(@Valid @ModelAttribute @RequestBody ListContainer questionCreateBindingModel,
+                                 BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes) {
 
         //questionCreateBindingModel.setQuizName(quizName);
         if (bindingResult.hasErrors()) {
@@ -114,11 +133,12 @@ public class QuizController {
         }
         //questionCreateBindingModel.setQuizName(quizName);
 
-        //int questionId = this.questionService.addQuestion(questionCreateBindingModel).getId();
+        this.questionService.addQuestions(questionCreateBindingModel.getQuestionDTOS());
 
         return "redirect:/hometeacher";
 
     }
+
 
     @GetMapping("/createquiz")
     public String createQuiz(Model model, Principal principal){
@@ -158,5 +178,14 @@ public class QuizController {
         return "redirect:/createquestion?quizName="+quizDTO.getCaption();
 
     }
+
+    @GetMapping("/createdquizzes")
+    public String createdQuizzes(Model model, Principal principal){
+
+        model.addAttribute("quizzes", this.quizService.findAllByEmail(principal.getName()));
+
+        return "views/teachers/createdquizzes";
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package bg.softuni.quizzical.model.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,6 +20,10 @@ public class Question extends BaseEntity{
 
     @OneToMany(mappedBy = "question")
     private Set<Answer> answers;
+
+    public Question() {
+        this.answers = new HashSet<>();
+    }
 
     public String getText() {
         return text;
