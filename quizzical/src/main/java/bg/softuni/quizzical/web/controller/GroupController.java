@@ -94,6 +94,14 @@ public class GroupController {
     }
 
 
+    @GetMapping("/teachers")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    public String allTeachers(Model model){
+
+        model.addAttribute("teachers", this.userService.findAllByRole("ROLE_TEACHER"));
+
+        return "views/students/allteachers";
+    }
 
 
 

@@ -193,8 +193,10 @@ public class QuizController {
 
         model.addAttribute("quizzes", this.quizService.findAllByEmail(principal.getName()));
 
-        return "views/teachers/createdquizzes";
+        return "views/students/myquizzes";
     }
+
+
 
 
 }

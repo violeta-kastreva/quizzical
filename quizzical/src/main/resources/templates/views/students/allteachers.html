@@ -1,6 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns:th="http://www.w3.org/1999/xhtml"><head>
     <meta charset="utf-8">
     <title>Quizzical</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,11 +16,13 @@
     <link href="/css/demo.css" rel="stylesheet">
     <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
           integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" rel="stylesheet">
+
+
 </head>
-<body class="index">
+<body class="index" data-new-gr-c-s-check-loaded="14.1071.0" data-gr-ext-installed="">
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-white">
-        <a class="navbar-brand text-primary ml-4" href="/">
+        <a class="navbar-brand text-primary ml-4" href="/Administration">
             Quizzical
         </a>
         <button class="navbar-toggler collapsed bg-primary" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-7" aria-controls="navbarNavDropdown-7" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,11 +39,9 @@
                 <li class="nav-item text-primary">
                     <form class="form-inline" action="/Identity/Account/Logout?returnUrl=%2F" method="post">
                         <button type="submit" class="btn btn-outline-primary ml-2">
-                            <i class="fas fa-sign-out-alt">
-
-                            </i> <a href="/logout">Logout</a>
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
-                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Dgdl0Inw3NFo_uXWyBLYsjM1x2dTpGe37-DzUK-RDOSO14VH_XR2wVXAlPFauv8cEzUJlww_Dd3DVIFO3VXJdEHwhcAIRC2gBTwQlz29iEibVZ-5TvL52ilibWkd-YHOkp8hp_pv9ZiFI-Q_SU_EARezCS6DGltN12JW2uE3f2Wbs-XNu5XMRMlIPdkjPuPoA"></form>
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Dgdl0Inw3NFo_uXWyBLYshDaH7WT8L3-dpwGXBCzFN3hhkXR5XtrW-wEtVLxv9sGynkpIURnA6uiNvfTCpS2WAjmk_kG9r8yrDEvnlqVlLAdfdxf-mRvHOcdNYpasV-2rhohe2hPu8Vk-wgXqF7Q9rixrq1xgiMSbRllSKHpPGKqJLDJ9rndhKpIL-WhmTImA"></form>
                 </li>
             </ul>
         </div>
@@ -113,39 +111,43 @@
             </ul>
         </div>
 
+
+
         <div class="col-12 col-md-9 ml-md-5">
 
-            <div class="col-12 col-md-9 offset-md-2">
-                <div class="row">
 
-
-
-                    <form method="post" class="col-12 col-md-5 offset-md-1" action="/homestudent">
-                        <div class="component">
-                            <div class="card">
-                                <div class="card-header text-warning" style="font-size: xx-large">
-                                    <i class="fas fa-folder-open"></i>
-                                </div>
-                                <div class="card-body pt-0">
-                                    <h4 class="card-title">Take Quiz</h4>
-                                    <span class="text-danger field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-                                </div>
-                                <div class="card-footer pb-3">
-                                    <button class="btn btn-outline-primary">Enter</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
+            <nav class="navbar navbar-expand-lg navbar-dark bg-neutral p-2">
+                <div class="container">
+                    <h5 class="mb-0">All students</h5>
+                    <button class="navbar-toggler collapsed bg-primary" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
                 </div>
-            </div>
+            </nav>
+            <table class="table table-hover mb-0">
+                <thead>
+                <tr class="table-active bg-white">
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
 
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="table-warning" th:each="teacher: ${teachers}">
+                    <th scope="row" class="pt-4" th:value="${teacher.firstName}" th:text="${teacher.firstName}"></th>
+                    <td class="pt-4" th:value="${teacher.lastName}" th:text="${teacher.lastName}"></td>
+                    <td class="pt-4" th:value="${teacher.email}" th:text="${teacher.email}"></td>
 
+                </tr>
 
-
-
+                </tbody>
+            </table>
         </div>
+
+
+    </div>
     </div>
 </main>
 
@@ -160,7 +162,7 @@
             <div class="links">
                 <ul class="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
                     <li>
-                        <a href="/">
+                        <a href="/homestudent">
                             Home
                         </a>
                     </li>
@@ -170,5 +172,10 @@
         </div>
     </div>
 </footer>
+
+
+
+
+
 
 </body></html>
