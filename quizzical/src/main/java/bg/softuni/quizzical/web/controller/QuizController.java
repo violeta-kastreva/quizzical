@@ -187,5 +187,14 @@ public class QuizController {
         return "views/teachers/createdquizzes";
     }
 
+    @GetMapping("/myquizzes")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    public String myQuizzes(Model model, Principal principal){
+
+        model.addAttribute("quizzes", this.quizService.findAllByEmail(principal.getName()));
+
+        return "views/teachers/createdquizzes";
+    }
+
 
 }

@@ -6,6 +6,7 @@ import bg.softuni.quizzical.service.QuizService;
 import bg.softuni.quizzical.service.SchoolClassService;
 import bg.softuni.quizzical.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -64,12 +65,34 @@ public class GroupController {
     }
 
     @GetMapping("/createdgroups")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     public String createdGroups(Model model, Principal principal){
 
         model.addAttribute("groups", this.schoolClassService.findAllByEmail(principal.getName()));
 
         return "views/teachers/createdgroups";
     }
+
+
+    @GetMapping("/allstudents")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    public String allStudents(Model model){
+
+        model.addAttribute("students", this.userService.findAllByRole("ROLE_STUDENT"));
+
+        return "views/teachers/allstudents";
+    }
+
+
+    @GetMapping("/mygroups")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    public String myGroups(Model model, Principal principal){
+
+        model.addAttribute("groups", this.schoolClassService.findAllByEmail(principal.getName()));
+
+        return "views/students/groups";
+    }
+
 
 
 
