@@ -11,7 +11,7 @@ public class Answer extends BaseEntity{
     @Column(nullable = false)
     private boolean isCorrectAnswer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "questions_id")
     private Question question;
 

@@ -11,9 +11,9 @@ public class Question extends BaseEntity{
     @Column(nullable = false)
     private String text;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "quizzes_id")
-    private Quiz quiz;
+    private Quiz quizzes;
 
     @Column
     private int points;
@@ -34,11 +34,11 @@ public class Question extends BaseEntity{
     }
 
     public Quiz getQuiz() {
-        return quiz;
+        return quizzes;
     }
 
     public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
+        this.quizzes = quiz;
     }
 
     public int getPoints() {

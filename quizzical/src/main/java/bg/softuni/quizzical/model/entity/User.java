@@ -6,10 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -54,10 +51,19 @@ public class User extends BaseEntity implements UserDetails{
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
     private Set<Role> authorities;
 
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL
+    )
+    private List<QuizUser> usersQuizzesResults = new ArrayList<>();
 
-    @OneToOne(mappedBy = "student", fetch = FetchType.LAZY)
-    private Quiz quiz;
-
+//    public List<QuizUser> getUsersQuizzesResults() {
+//        return usersQuizzesResults;
+//    }
+//
+//    public void setUsersQuizzesResults(List<QuizUser> usersQuizzesResults) {
+//        this.usersQuizzesResults = usersQuizzesResults;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -134,11 +140,5 @@ public class User extends BaseEntity implements UserDetails{
         this.authorities = authorities;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
 }

@@ -7,7 +7,23 @@ public class AnswerDTO {
 
     private boolean isCorrectAnswer;
 
+    private boolean isChecked;
 
+    public boolean isCorrectAnswer() {
+        return isCorrectAnswer;
+    }
+
+    public void setCorrectAnswer(boolean correctAnswer) {
+        isCorrectAnswer = correctAnswer;
+    }
+
+    public boolean getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public AnswerDTO() {
     }

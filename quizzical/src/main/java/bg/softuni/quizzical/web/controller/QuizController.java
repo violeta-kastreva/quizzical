@@ -1,9 +1,6 @@
 package bg.softuni.quizzical.web.controller;
 
-import bg.softuni.quizzical.model.service.AnswerDTO;
-import bg.softuni.quizzical.model.service.QuestionCollectionDTO;
-import bg.softuni.quizzical.model.service.QuestionDTO;
-import bg.softuni.quizzical.model.service.QuizDTO;
+import bg.softuni.quizzical.model.service.*;
 import bg.softuni.quizzical.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,10 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class QuizController {
@@ -89,13 +83,8 @@ public class QuizController {
 
     @GetMapping("/createquestion")
     public String createQuestion(Model model, @RequestParam String quizName, @RequestParam String answerCount, @RequestParam String questionsCount){
-        if (
-//                !model.containsAttribute("questionCreateBindingModel")
-                model.getAttribute("questionCreateBindingModel") == null ||
-//                        ((List<QuestionDTO>)model.getAttribute("questionCreateBindingModel")).isEmpty()
-                        ((ListContainer)model.getAttribute("questionCreateBindingModel")).getQuestionDTOS().isEmpty()
+        if (model.getAttribute("questionCreateBindingModel") == null ||  ((ListContainer)model.getAttribute("questionCreateBindingModel")).getQuestionDTOS().isEmpty()
         ) {
-//        ) {
             List<QuestionDTO> questionDTOS = new ArrayList<>();
             for (int i = 0; i < Integer.parseInt(questionsCount) ; i++) {
                 QuestionDTO questionDTO = new QuestionDTO();
@@ -170,10 +159,8 @@ public class QuizController {
 
 
         this.quizService.createQuiz(quizDTO);
-        //redirectAttributes.addAttribute("quizName", quizDTO.getCaption());
         redirectAttributes.addAttribute("answerCount", quizDTO.getAnswerCount());
         redirectAttributes.addAttribute("questionsCount", quizDTO.getQuestionsCount());
-        //redirectAttributes.addAttribute("quizName", quizDTO.getCaption());
 
         return "redirect:/createquestion?quizName="+quizDTO.getCaption();
 
@@ -194,6 +181,39 @@ public class QuizController {
         model.addAttribute("quizzes", this.quizService.findAllByEmail(principal.getName()));
 
         return "views/students/myquizzes";
+    }
+
+    @GetMapping("/takequiz")
+    public String takeQuiz(Model model, @RequestParam String quizName){
+        if (!model.containsAttribute("takeQuizBindingModel") ) {
+            List<QuestionDTO> questionDTOS = this.quizService.getQuizByName(quizName);
+            ListContainer listContainer = new ListContainer();
+            listContainer.setQuestionDTOS(questionDTOS);
+            model.addAttribute("takeQuizBindingModel", listContainer);
+        }
+        return "views/students/takequiz";
+    }
+
+    @PostMapping(value = "/takequiz", consumes = "application/x-www-form-urlencoded")
+    public String submitQuiz(@Valid @ModelAttribute @RequestBody ListContainer takeQuizBindingModel,
+                             BindingResult bindingResult, Principal principal){
+        if(bindingResult.hasErrors()){
+            return "redirect:/homestudent";
+        }
+
+        this.quizService.takenQuiz(takeQuizBindingModel.getQuestionDTOS(), principal.getName());
+
+        return "redirect:/homestudent";
+    }
+
+    @GetMapping("/myresults")
+    public String results(Model model, Principal principal){
+        if (!model.containsAttribute("viewResultsBindingModel") ) {
+            List<QuizUserDTO> quizPoints = this.quizService.getScoreByUser(principal.getName());
+
+            model.addAttribute("viewResultsBindingModel", quizPoints);
+        }
+        return "views/students/myresults";
     }
 
 

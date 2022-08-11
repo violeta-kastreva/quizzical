@@ -1,28 +1,32 @@
 package bg.softuni.quizzical.service.impl;
 
-import bg.softuni.quizzical.model.entity.Quiz;
-import bg.softuni.quizzical.model.entity.SchoolClass;
-import bg.softuni.quizzical.model.entity.User;
+import bg.softuni.quizzical.model.entity.*;
+import bg.softuni.quizzical.model.service.AnswerDTO;
+import bg.softuni.quizzical.model.service.QuestionDTO;
 import bg.softuni.quizzical.model.service.QuizDTO;
+import bg.softuni.quizzical.model.service.QuizUserDTO;
 import bg.softuni.quizzical.repository.QuizRepository;
+import bg.softuni.quizzical.repository.QuizUserRepository;
 import bg.softuni.quizzical.repository.SchoolClassRepository;
 import bg.softuni.quizzical.repository.UserRepository;
 import bg.softuni.quizzical.service.QuizService;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.transaction.Transactional;
+import java.util.*;
 
 @Service
 public class QuizServiceImpl implements QuizService {
     private SchoolClassRepository schoolClassRepository;
     private QuizRepository quizRepository;
     private final UserRepository userRepository;
+    private final QuizUserRepository quizUserRepository;
 
-    public QuizServiceImpl(SchoolClassRepository schoolClassRepository, QuizRepository quizRepository, UserRepository userRepository) {
+    public QuizServiceImpl(SchoolClassRepository schoolClassRepository, QuizRepository quizRepository, UserRepository userRepository, QuizUserRepository quizUserRepository) {
         this.schoolClassRepository = schoolClassRepository;
         this.quizRepository = quizRepository;
         this.userRepository = userRepository;
+        this.quizUserRepository = quizUserRepository;
     }
 
     @Override
@@ -50,5 +54,79 @@ public class QuizServiceImpl implements QuizService {
             allQuizzes.add(quizDTO);
         }));
         return allQuizzes;
+    }
+
+    @Override
+    @Transactional
+    public List<QuestionDTO> getQuizByName(String quizName) {
+        Quiz quiz = this.quizRepository.findFirstByCaption(quizName).get();
+        if(quiz.getQuestions() == null || quiz.getQuestions().isEmpty()){
+            return new ArrayList<QuestionDTO>();
+        }
+        Set<Question> questions = quiz.getQuestions();
+
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+        questions.stream().forEach(q->{
+            QuestionDTO questionDTO = new QuestionDTO();
+            questionDTO.setQuizName(quizName);
+            questionDTO.setText(q.getText());
+            questionDTO.setPoints(q.getPoints());
+            q.getAnswers().stream().forEach(a->{
+                AnswerDTO answerDTO = new AnswerDTO();
+                answerDTO.setContent(a.getContent());
+                answerDTO.setIsCorrectAnswer(a.isCorrectAnswer());
+                answerDTO.setIsChecked(false);
+                questionDTO.getAnswers().add(answerDTO);
+            });
+            questionDTOS.add(questionDTO);
+        });
+        return questionDTOS;
+    }
+
+    @Override
+    @Transactional
+    public void takenQuiz(List<QuestionDTO> questionDTOS, String name) {
+        Quiz quiz = this.quizRepository.findFirstByCaption(questionDTOS.get(0).getQuizName()).get();
+        int score = 0;
+        for (QuestionDTO questionDTO: questionDTOS) {
+            boolean hasWrongAnswer = false;
+
+            for (AnswerDTO answerDTO: questionDTO.getAnswers()){
+                if (answerDTO.getIsChecked()!=answerDTO.getIsCorrectAnswer() ){
+                   hasWrongAnswer = true;
+                }
+            }
+            if(!hasWrongAnswer){
+                score+=questionDTO.getPoints();
+            }
+        }
+
+        QuizUser quizUser = new QuizUser();
+        quizUser.setQuiz(quiz);
+        quizUser.setUser(this.userRepository.findFirstByEmail(name).get());
+        quizUser.setResult(score);
+
+        this.quizUserRepository.save(quizUser);
+
+
+
+    }
+
+    @Override
+    public List<QuizUserDTO> getScoreByUser(String name) {
+        List<QuizUser> quizUsers = this.quizUserRepository.findAllByUserId(this.userRepository.findFirstByEmail(name).get().getId()).stream().toList();
+        List<QuizUserDTO> resultList= new ArrayList<>();
+        quizUsers.forEach(q->{
+            QuizUserDTO quizUserDTO = new QuizUserDTO();
+            Quiz quiz = this.quizRepository.findById(q.getQuiz().getId()).get();
+            quizUserDTO.setScore(q.getResult());
+            quizUserDTO.setQuizName(quiz.getCaption());
+            quizUserDTO.setTotalPoints(getTotalPoint(quiz));
+        });
+        return resultList;
+    }
+
+    private int getTotalPoint(Quiz quiz){
+        return quiz.getQuestions().stream().mapToInt(q->q.getPoints()).sum();
     }
 }

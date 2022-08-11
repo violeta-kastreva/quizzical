@@ -126,40 +126,46 @@
 
             <div class="container-fluid">
                 <div class="col-12 offset-md-2 col-md-8 row">
-                    <form th:action="@{/addanswers}" th:method="POST" th:object="${answersCreateBindingModel}">
-                        <div class="component">
+                    <form th:action="@{/takequiz}" th:method="post" th:object="${takeQuizBindingModel}">
+                        <div class="component" >
+                            <th:block  th:each="question, ind: *{questionDTOS}">
                             <div class="card mb-3 mt-3">
                                 <div class="card-header text-warning" style="font-size: xx-large">
                                     <i class="fas fa-question"></i>
                                 </div>
 
                                 <div class="card-body">
-                                    <h4 class="card-title">Describe Answers: </h4>
+                                    <h4 class="card-title" th:value="*{questionDTOS[__${ind.index}__].text}" th:text="*{questionDTOS[__${ind.index}__].text}" th:field="*{questionDTOS[__${ind.index}__].text}"> </h4>
                                     <p class="card-text" style="display: block;">
                                         <span class="text-primary mr-1">∗</span>
-                                        Mark the correct answer
+                                        More than one answer can be correct, if you mark a wrong answer, the whole question will be marked as false!
                                     </p>
                                     <p class="card-text">
                                         <span class="text-primary mr-1"></span>
                                     </p>
                                 </div>
-                                <div class="card-footer pb-5" th:each="answer:${answersCreateBindingModel}">
+                                <input type="hidden" th:value="${question.quizName}" th:field="*{questionDTOS[__${ind.index}__].quizName}" >
+                                <input type="hidden" th:value="${question.points}" th:field="*{questionDTOS[__${ind.index}__].points}" >
+
+                                <div class="card-footer pb-5">
                                     <div>
                                         <div><label for="answer">Answer option:</label></div>
-                                        <div class="input-group" id="answer">
+                                        <div class="input-group" id="answer" th:each="answer, ind2:${question.answers}">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <input type="radio" aria-label="Radio button for following text input" th:field="*{isCorrectAnswer}">
+                                                    <input type="checkbox" aria-label="Radio button for following text input" th:field="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].isChecked}" >
+                                                    <input type="hidden" aria-label="Radio button for following text input" th:field="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].isCorrectAnswer}" >
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" th:field="*{content}">
-                                            <input type="hidden" th:field="*{questionId}">
+                                            <div  class="form-control" aria-label="Text input with radio button" th:value="${answer.content}"   th:text="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].content}"  th:field="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].content}"> </div>
+
                                         </div>
                                     </div>
 
 
                                 </div>
                             </div>
+                            </th:block>
                         </div>
 
                         <div class="row mx-4 text-white">

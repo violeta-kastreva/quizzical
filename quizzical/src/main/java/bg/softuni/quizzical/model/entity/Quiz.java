@@ -1,8 +1,12 @@
 package bg.softuni.quizzical.model.entity;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,15 +23,25 @@ public class Quiz extends BaseEntity{
     @JoinColumn(name = "school_classes_id")
     private SchoolClass schoolClass;
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "quizzes")
     private Set<Question> questions;
 
     @Column
     private int score;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User student;
+    @OneToMany(
+            mappedBy = "quiz",
+            cascade = CascadeType.ALL
+    )
+    private List<QuizUser> quizzesUsersResult = new ArrayList<>();
+
+//    public List<QuizUser> getQuizzesUsersResult() {
+//        return quizzesUsersResult;
+//    }
+//
+//    public void setQuizzesUsersResult(List<QuizUser> quizzesUsersResult) {
+//        this.quizzesUsersResult = quizzesUsersResult;
+//    }
 
     public Quiz() {
         this.questions = new HashSet<>();
@@ -73,11 +87,5 @@ public class Quiz extends BaseEntity{
         this.score = score;
     }
 
-    public User getStudent() {
-        return student;
-    }
 
-    public void setStudent(User student) {
-        this.student = student;
-    }
 }
