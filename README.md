@@ -9,8 +9,10 @@
 **Description:**
 
 Quizzical is a web app used for tracking the progress of students via quizzes. 
-Teacher - users have the opportunity to create network of students, place them in different groups and assign quiz events to the groups (exam quiz for example). Last but not least teacher receives students' results right after the quiz is taken.
-Student - users also can keep track of their own results and all information about the ended, active or pending events that are assigned to them.
+
+Teacher-users have the opportunity to create network of students, place them in different groups and assign quiz events to the groups (exam quiz for example). Last but not least teacher receives students' results right after the quiz is taken.
+
+Student-users also can keep track of their own results and all information about the ended, active or pending quizzes that are assigned to them.
 
 **Technologies:**
 
