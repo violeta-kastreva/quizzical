@@ -184,6 +184,7 @@ public class QuizController {
     }
 
     @GetMapping("/takequiz")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
     public String takeQuiz(Model model, @RequestParam String quizName){
         if (!model.containsAttribute("takeQuizBindingModel") ) {
             List<QuestionDTO> questionDTOS = this.quizService.getQuizByName(quizName);
@@ -207,15 +208,26 @@ public class QuizController {
     }
 
     @GetMapping("/myresults")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
     public String results(Model model, Principal principal){
-        if (!model.containsAttribute("viewResultsBindingModel") ) {
+        if (!model.containsAttribute("quizPointsView") ) {
             List<QuizUserDTO> quizPoints = this.quizService.getScoreByUser(principal.getName());
 
-            model.addAttribute("viewResultsBindingModel", quizPoints);
+            model.addAttribute("quizPointsView", quizPoints);
         }
         return "views/students/myresults";
     }
 
+    @GetMapping("/allresults")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    public String resultsAll(Model model, Principal principal){
+        if (!model.containsAttribute("quizPointsView") ) {
+            List<QuizUserDTO> quizPoints = this.quizService.getAllScoresByUser(principal.getName());
+
+            model.addAttribute("quizPointsView", quizPoints);
+        }
+        return "views/teachers/allresults";
+    }
 
 
 

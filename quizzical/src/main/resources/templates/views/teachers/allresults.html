@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<html xmlns:th="http://www.w3.org/1999/xhtml"><head>
     <meta charset="utf-8">
     <title>Quizzical</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,8 +16,10 @@
     <link href="/css/demo.css" rel="stylesheet">
     <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
           integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" rel="stylesheet">
+
+
 </head>
-<body class="index">
+<body class="index" data-new-gr-c-s-check-loaded="14.1071.0" data-gr-ext-installed="">
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-white">
         <a class="navbar-brand text-primary ml-4" href="/Administration">
@@ -41,7 +41,7 @@
                         <button type="submit" class="btn btn-outline-primary ml-2">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
-                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Dgdl0Inw3NFo_uXWyBLYshTt3sRlOQ5r1YPtDNN1mMNYf0gJfFYWgFnGJoRRV05d_4TMDWKq0_FpghKFo2e02Ge6BDoYJB89ey7P7ARtwcfFbCn-_m1xVjaCe8Oj0vk6QZbK29RrcyhHYZwjOAv0XH9QsYIy41Ld08KL1EXqgryRVhyOV2v3hxnHGwT6PdWiA"></form>
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Dgdl0Inw3NFo_uXWyBLYshDaH7WT8L3-dpwGXBCzFN3hhkXR5XtrW-wEtVLxv9sGynkpIURnA6uiNvfTCpS2WAjmk_kG9r8yrDEvnlqVlLAdfdxf-mRvHOcdNYpasV-2rhohe2hPu8Vk-wgXqF7Q9rixrq1xgiMSbRllSKHpPGKqJLDJ9rndhKpIL-WhmTImA"></form>
                 </li>
             </ul>
         </div>
@@ -85,103 +85,106 @@
             <ul class="navbar-nav text-center">
                 <li class="nav-item active">
                     <form class="mb-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/homestudent">Home</button>
+                        <button class="btn btn-primary manage-account-btn" formaction="/hometeacher">Home</button>
                     </form>
                 </li>
                 <li class="nav-item active">
                     <form class="my-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/myresults">Results</button>
+                        <button class="btn btn-primary manage-account-btn" formaction="/Administration/Results">Results</button>
                     </form>
                 </li>
                 <li class="nav-item active">
                     <form class="my-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/mygroups">Groups</button>
+                        <button class="btn btn-primary manage-account-btn" formaction="/createdgroups">Groups</button>
                     </form>
                 </li>
                 <li class="nav-item active">
                     <form class="my-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/myquizzes">Quizzes</button>
+                        <button class="btn btn-primary manage-account-btn" formaction="/createdquizzes">Quizzes</button>
                     </form>
                 </li>
                 <li class="nav-item active">
                     <form class="my-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/allteachers">Teachers</button>
+                        <button class="btn btn-primary manage-account-btn" formaction="/allstudents">Students</button>
                     </form>
                 </li>
             </ul>
         </div>
 
 
+
+
         <div class="col-12 col-md-9 ml-md-5">
 
-            <div class="container-fluid">
-                <div class="col-12 offset-md-2 col-md-8 row">
-                    <form th:action="@{/takequiz}" th:method="post" th:object="${takeQuizBindingModel}">
-                        <div class="component" >
-                            <th:block  th:each="question, ind: *{questionDTOS}">
-                            <div class="card mb-3 mt-3">
-                                <div class="card-header text-warning" style="font-size: xx-large">
-                                    <i class="fas fa-question"></i>
-                                </div>
 
-                                <div class="card-body">
-                                    <h4 class="card-title" th:value="*{questionDTOS[__${ind.index}__].text}" th:text="*{questionDTOS[__${ind.index}__].text}" th:field="*{questionDTOS[__${ind.index}__].text}"> </h4>
-                                    <p class="card-text" style="display: block;">
-                                        <span class="text-primary mr-1">∗</span>
-                                        More than one answer can be correct, if you mark a wrong answer, the whole question will be marked as false!
-                                    </p>
-                                    <p class="card-text">
-                                        <span class="text-primary mr-1"></span>
-                                    </p>
-                                </div>
-                                <input type="hidden" th:value="${question.quizName}" th:field="*{questionDTOS[__${ind.index}__].quizName}" >
-                                <input type="hidden" th:value="${question.points}" th:field="*{questionDTOS[__${ind.index}__].points}" >
+            <nav class="navbar navbar-expand-lg navbar-dark bg-neutral p-2">
+                <div class="container">
+                    <h5 class="mb-0">Results</h5>
+                    <button class="navbar-toggler collapsed bg-primary" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3" aria-controls="navbarNavDropdown-3" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse text-center collapse" id="navbarNavDropdown-3">
 
-                                <div class="card-footer pb-5">
-                                    <div>
-                                        <div><label for="answer">Answer option:</label></div>
-                                        <div class="input-group" id="answer" th:each="answer, ind2:${question.answers}">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <input type="checkbox" aria-label="Radio button for following text input" th:field="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].isChecked}" >
-                                                    <input type="hidden" aria-label="Radio button for following text input" th:field="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].isCorrectAnswer}" >
-                                                </div>
-                                            </div>
-                                            <div  class="form-control" aria-label="Text input with radio button" th:value="${answer.content}"   th:text="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].content}"  th:field="*{questionDTOS[__${ind.index}__].answers[__${ind2.index}__].content}"> </div>
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            </th:block>
-                        </div>
-
-                        <div class="row mx-4 text-white">
-                            <button id="addQuiz" type="submit" class="btn btn-primary col-md-5 mt-5">Submit answers</button>
-                            <div class="col-1 mr-4"></div>
-
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </nav>
+            <table class="table table-hover mb-0">
+                <thead>
+                <tr class="table-active bg-white">
+                    <th scope="col">Quiz Name</th>
+                    <th scope="col">Student username</th>
+                    <th scope="col">Student score</th>
+                    <th scope="col">Max score</th>
 
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="table-warning" th:each="quiz:${quizPointsView}">
+                    <th scope="row" class="pt-4" th:value="${quiz.quizName}" th:text="${quiz.quizName}">aaaa</th>
+                    <th scope="row" class="pt-4" th:value="${quiz.username}" th:text="${quiz.username}">aaaa</th>
+                    <td class="pt-4" th:value="${quiz.score}" th:text="${quiz.score}">31.07.2022</td>
+                    <td class="pt-4" th:value="${quiz.totalPoints}" th:text="${quiz.totalPoints}"></td>
 
+                </tr>
+
+                </tbody>
+            </table>
         </div>
+
+
+
+
+
+
+    </div>
     </div>
 </main>
 
 
 
+<footer class="footer-1 bg-light text-dark pt-2">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="copyright text-center">
+                <p class="small mb-0">© 2022, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by VKastreva</p>
+            </div>
+            <div class="links">
+                <ul class="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
+                    <li>
+                        <a href="/homestudent">
+                            Home
+                        </a>
+                    </li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 
 
 
 
-<div class="tox tox-silver-sink tox-tinymce-aux" style="position: relative;"></div>
 
 
-</body>
-
-</html>
+</body></html>

@@ -19,4 +19,8 @@ public interface QuizService {
     void takenQuiz(List<QuestionDTO> questionDTOS, String name);
 
     List<QuizUserDTO> getScoreByUser(String name);
+
+    int getTotalPoints(Quiz quiz);
+
+    List<QuizUserDTO> getAllScoresByUser(String name);
 }

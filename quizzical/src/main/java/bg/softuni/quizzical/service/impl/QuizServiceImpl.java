@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class QuizServiceImpl implements QuizService {
@@ -113,20 +114,44 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
+    @Transactional
     public List<QuizUserDTO> getScoreByUser(String name) {
-        List<QuizUser> quizUsers = this.quizUserRepository.findAllByUserId(this.userRepository.findFirstByEmail(name).get().getId()).stream().toList();
+        List<QuizUser> quizUsers = this.quizUserRepository.findAllByUserId(this.userRepository.findFirstByEmail(name).get().getId());
         List<QuizUserDTO> resultList= new ArrayList<>();
         quizUsers.forEach(q->{
             QuizUserDTO quizUserDTO = new QuizUserDTO();
-            Quiz quiz = this.quizRepository.findById(q.getQuiz().getId()).get();
+            Quiz quiz = q.getQuiz();
             quizUserDTO.setScore(q.getResult());
             quizUserDTO.setQuizName(quiz.getCaption());
-            quizUserDTO.setTotalPoints(getTotalPoint(quiz));
+            quizUserDTO.setTotalPoints(getTotalPoints(quiz));
+            resultList.add(quizUserDTO);
         });
         return resultList;
+
+
     }
 
-    private int getTotalPoint(Quiz quiz){
+    @Override
+    @Transactional
+    public int getTotalPoints(Quiz quiz){
         return quiz.getQuestions().stream().mapToInt(q->q.getPoints()).sum();
+    }
+
+    @Override
+    @Transactional
+    public List<QuizUserDTO> getAllScoresByUser(String name) {
+        List<QuizUser> quizUsers = this.quizUserRepository.findAll();
+        List<QuizUserDTO> resultList= new ArrayList<>();
+        quizUsers.forEach(q->{
+            QuizUserDTO quizUserDTO = new QuizUserDTO();
+            Quiz quiz = q.getQuiz();
+            User user = q.getUser();
+            quizUserDTO.setUsername(user.getUsername());
+            quizUserDTO.setScore(q.getResult());
+            quizUserDTO.setQuizName(quiz.getCaption());
+            quizUserDTO.setTotalPoints(getTotalPoints(quiz));
+            resultList.add(quizUserDTO);
+        });
+        return resultList;
     }
 }
