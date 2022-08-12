@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/violeta-kastreva/quizzical/blob/master/quizzical/src/main/resources/static/img/logo.png" align="right"/>
+<img src="https://github.com/violeta-kastreva/quizzical/blob/master/quizzical/src/main/resources/static/img/logo.png?raw=true" align="right" width="50" height="50"/>
 
 # Quizzical
 
