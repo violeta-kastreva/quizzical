@@ -1,6 +1,8 @@
 package bg.softuni.quizzical.web.controller;
 
 import bg.softuni.quizzical.error.UserAlreadyExistException;
+import bg.softuni.quizzical.model.service.QuizUserDTO;
+import bg.softuni.quizzical.model.service.UserAccountDTO;
 import bg.softuni.quizzical.model.service.UserDTO;
 import bg.softuni.quizzical.model.service.UserRegistrationDTO;
 import bg.softuni.quizzical.service.UserService;
@@ -18,7 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.management.relation.RoleNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Collection;
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -95,5 +99,6 @@ public class UserController {
 
         return "redirect:/users/login";
     }
+
 
 }

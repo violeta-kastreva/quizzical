@@ -4,6 +4,7 @@ import bg.softuni.quizzical.model.entity.Quiz;
 import bg.softuni.quizzical.model.service.QuestionDTO;
 import bg.softuni.quizzical.model.service.QuizDTO;
 import bg.softuni.quizzical.model.service.QuizUserDTO;
+import bg.softuni.quizzical.model.service.UserAccountDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +24,6 @@ public interface QuizService {
     int getTotalPoints(Quiz quiz);
 
     List<QuizUserDTO> getAllScoresByUser(String name);
+
+    UserAccountDTO getAccountInfo(String name);
 }

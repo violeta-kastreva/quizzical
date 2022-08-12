@@ -3,6 +3,7 @@ package bg.softuni.quizzical.service;
 import bg.softuni.quizzical.error.InvalidEmailException;
 import bg.softuni.quizzical.error.UserAlreadyExistException;
 import bg.softuni.quizzical.model.service.SchoolClassDTO;
+import bg.softuni.quizzical.model.service.UserAccountDTO;
 import bg.softuni.quizzical.model.service.UserDTO;
 import bg.softuni.quizzical.model.service.UserRegistrationDTO;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,7 +28,6 @@ public interface UserService {
     List<UserDTO> findAllByRole(String role);
 
     void seedUsersInDb() throws RoleNotFoundException;
-
 
 
 

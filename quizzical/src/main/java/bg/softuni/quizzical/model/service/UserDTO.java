@@ -80,6 +80,8 @@ public class UserDTO {
         this.confirmPassword = confirmPassword;
     }
 
+
+
     public UserDTO(@NotBlank(message = "First name is required") String firstName, @NotBlank(message = "Last name is required") String lastName, @NotNull @Email(message = "Email must be valid") String email, @NotNull @Length(min = 3, max = 25, message = "Password must be between 3 and 25 least 3 characters.") String password, @NotNull @Length(min = 3, max = 25, message = "Password must be between 3 and 25  characters.") String confirmPassword, Set<Role> authorities) {
         this.firstName = firstName;
         this.lastName = lastName;

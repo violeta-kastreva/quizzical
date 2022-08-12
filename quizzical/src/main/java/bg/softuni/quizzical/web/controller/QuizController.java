@@ -229,6 +229,25 @@ public class QuizController {
         return "views/teachers/allresults";
     }
 
+    @GetMapping("/teacherprofile")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    public String profileData(Model model, Principal principal){
+        if (!model.containsAttribute("accountInfo") ) {
+            UserAccountDTO userAccountDTO = this.quizService.getAccountInfo(principal.getName());
+            model.addAttribute("accountInfo", userAccountDTO);
+        }
+        return "views/teachers/teacherprofile";
+    }
+
+    @GetMapping("/studentprofile")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    public String profileDataStudent(Model model, Principal principal){
+        if (!model.containsAttribute("accountInfo") ) {
+            UserAccountDTO userAccountDTO = this.quizService.getAccountInfo(principal.getName());
+            model.addAttribute("accountInfo", userAccountDTO);
+        }
+        return "views/students/studentprofile";
+    }
 
 
 }

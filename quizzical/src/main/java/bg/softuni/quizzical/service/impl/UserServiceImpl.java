@@ -6,6 +6,7 @@ import bg.softuni.quizzical.error.UserNotFoundException;
 import bg.softuni.quizzical.model.entity.Role;
 import bg.softuni.quizzical.model.entity.User;
 import bg.softuni.quizzical.model.service.RoleDTO;
+import bg.softuni.quizzical.model.service.UserAccountDTO;
 import bg.softuni.quizzical.model.service.UserDTO;
 import bg.softuni.quizzical.model.service.UserRegistrationDTO;
 import bg.softuni.quizzical.repository.UserRepository;
@@ -22,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.management.relation.RoleNotFoundException;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -185,4 +187,6 @@ public class UserServiceImpl implements UserService, UserDetailsService{
                             Set.of(this.roleService.findAuthorityByName("ROLE_STUDENT"))));
         }
     }
+
+
 }

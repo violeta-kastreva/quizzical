@@ -94,7 +94,7 @@ public class GroupController {
     }
 
 
-    @GetMapping("/teachers")
+    @GetMapping("/allteachers")
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     public String allTeachers(Model model){
 

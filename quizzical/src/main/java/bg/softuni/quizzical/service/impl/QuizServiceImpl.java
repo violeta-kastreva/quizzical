@@ -1,10 +1,7 @@
 package bg.softuni.quizzical.service.impl;
 
 import bg.softuni.quizzical.model.entity.*;
-import bg.softuni.quizzical.model.service.AnswerDTO;
-import bg.softuni.quizzical.model.service.QuestionDTO;
-import bg.softuni.quizzical.model.service.QuizDTO;
-import bg.softuni.quizzical.model.service.QuizUserDTO;
+import bg.softuni.quizzical.model.service.*;
 import bg.softuni.quizzical.repository.QuizRepository;
 import bg.softuni.quizzical.repository.QuizUserRepository;
 import bg.softuni.quizzical.repository.SchoolClassRepository;
@@ -153,5 +150,12 @@ public class QuizServiceImpl implements QuizService {
             resultList.add(quizUserDTO);
         });
         return resultList;
+    }
+
+    @Override
+    @Transactional
+    public UserAccountDTO getAccountInfo(String name) {
+        User user = this.userRepository.findFirstByEmail(name).get();
+        return new UserAccountDTO(user.getEmail(), user.getFirstName(), user.getLastName());
     }
 }
