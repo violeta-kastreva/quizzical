@@ -34,40 +34,6 @@ public class QuizController {
         this.answersService = answersService;
     }
 
-  /*  @GetMapping("/addanswers/{questionId}")
-    public String createAnswers(Model model, @RequestParam String questionId, @RequestParam String answerCount){
-        if (!model.containsAttribute("answersCreateBindingModel")) {
-            Set<AnswerDTO> answers = new HashSet<>();
-            for (int i = 0; i < Integer.parseInt(answerCount); i++) {
-                answers.add(new AnswerDTO(questionId));
-            }
-            model.addAttribute("answersCreateBindingModel", answers);
-        }
-        return "views/teachers/addanswers/"+questionId;
-    }
-
-    @PostMapping("/addanswers/{questionId}")
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
-    public String createAnswers(@Valid @ModelAttribute("answersCreateBindingModel") Set<AnswerDTO> answersCreateBindingModel,
-                                BindingResult bindingResult,
-                                RedirectAttributes redirectAttributes, @PathVariable String questionId) {
-
-
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("answersCreateBindingModel", answersCreateBindingModel);
-            redirectAttributes.addFlashAttribute(String.format("BINDING_RESULT" + "answersCreateBindingModel"), bindingResult);
-            return "redirect:/createanswers";
-        }
-
-        this.answersService.addAnswersToQuestion(answersCreateBindingModel, questionId);
-        String quizName = this.questionService.getQuizName(questionId);
-
-        return "redirect:/createquestion/"+ questionId;
-
-    }
-
-    */
-
     private class ListContainer {
         private List<QuestionDTO> questionDTOS;
         public ListContainer() {
@@ -114,13 +80,11 @@ public class QuizController {
                                  BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes) {
 
-        //questionCreateBindingModel.setQuizName(quizName);
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("questionCreateBindingModel", questionCreateBindingModel);
             redirectAttributes.addFlashAttribute(String.format("BINDING_RESULT" + "questionCreateBindingModel"), bindingResult);
             return "redirect:/createquestion";
         }
-        //questionCreateBindingModel.setQuizName(quizName);
 
         this.questionService.addQuestions(questionCreateBindingModel.getQuestionDTOS());
 
@@ -138,7 +102,6 @@ public class QuizController {
         model.addAttribute("questionsDropdown", this.questionService.loadQuestions());
         model.addAttribute("answersDropdown", this.questionService.loadAnswers());
 
-
         return "views/teachers/createquiz";
     }
 
@@ -147,39 +110,29 @@ public class QuizController {
     public String createQuizConfirm(@Valid @ModelAttribute("quizCreateBindingModel") QuizDTO quizAddBindingModel,
                                      BindingResult bindingResult,
                                      RedirectAttributes redirectAttributes) {
-
-
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("quizCreateBindingModel", quizAddBindingModel);
             redirectAttributes.addFlashAttribute(String.format("BINDING_RESULT" + "quizCreateBindingModel"), bindingResult);
             return "redirect:/createquiz";
         }
-
         QuizDTO quizDTO = this.modelMapper.map(quizAddBindingModel, QuizDTO.class);
-
-
         this.quizService.createQuiz(quizDTO);
         redirectAttributes.addAttribute("answerCount", quizDTO.getAnswerCount());
         redirectAttributes.addAttribute("questionsCount", quizDTO.getQuestionsCount());
 
         return "redirect:/createquestion?quizName="+quizDTO.getCaption();
-
     }
 
     @GetMapping("/createdquizzes")
     public String createdQuizzes(Model model, Principal principal){
-
         model.addAttribute("quizzes", this.quizService.findAllByEmail(principal.getName()));
-
         return "views/teachers/createdquizzes";
     }
 
     @GetMapping("/myquizzes")
     @PreAuthorize("hasRole('ROLE_STUDENT')")
     public String myQuizzes(Model model, Principal principal){
-
         model.addAttribute("quizzes", this.quizService.findAllByEmail(principal.getName()));
-
         return "views/students/myquizzes";
     }
 
@@ -201,9 +154,7 @@ public class QuizController {
         if(bindingResult.hasErrors()){
             return "redirect:/homestudent";
         }
-
         this.quizService.takenQuiz(takeQuizBindingModel.getQuestionDTOS(), principal.getName());
-
         return "redirect:/homestudent";
     }
 
