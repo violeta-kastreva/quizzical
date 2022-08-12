@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/rusevradoslav/DevUni/master/src/main/resources/static/images/5198robot.ico" align="right"/>
+<img src="https://github.com/violeta-kastreva/quizzical/blob/master/quizzical/src/main/resources/static/img/logo.png?raw=true" align="right" width="50" height="50"/>
 
 # Quizzical
 
@@ -9,8 +9,10 @@
 **Description:**
 
 Quizzical is a web app used for tracking the progress of students via quizzes. 
-Teacher - users have the opportunity to create network of students, place them in different groups and assign quiz events to the groups (exam quiz for example). Last but not least teacher receives students' results right after the quiz is taken.
-Student - users also can keep track of their own results and all information about the ended, active or pending events that are assigned to them.
+
+Teacher-users have the opportunity to create network of students, place them in different groups and assign quiz events to the groups (exam quiz for example). Last but not least teacher receives students' results right after the quiz is taken.
+
+Student-users also can keep track of their own results and all information about the ended, active or pending quizzes that are assigned to them.
 
 **Technologies:**
 
@@ -101,12 +103,66 @@ URLs | Description
  */studentprofile* | User Details page - page where a student can see user profile details.
  
 
+Database Diagram Screenshot
+ ---
+ 
+ ![database](/quizzical/src/main/resources/static/screenshots/database.jpg)
+ 
+ 
+ Website Screenshots
+ ---
+ 
+ - Index Page 
+ ![indexpage](/quizzical/src/main/resources/static/screenshots/indexpage.jpg) 
+ 
+ - Register Page 
+ ![registerpage](/quizzical/src/main/resources/static/screenshots/register.jpg) 
+ 
+ - Login Page 
+  ![login](/quizzical/src/main/resources/static/screenshots/login.jpg)    
+ 
+ - Teacher Home Page 
+ ![homepageteacher](/quizzical/src/main/resources/static/screenshots/teacherhome.jpg)
+ 
+  - Student Home Page 
+ ![homepagestudent](/quizzical/src/main/resources/static/screenshots/studenthome.jpg) 
+ 
+  - View Profile Page
+ ![profilepage](/quizzical/src/main/resources/static/screenshots/teacherprofile.jpg)
+ 
+ - Teacher Create Group Page
+ ![creategroup](/quizzical/src/main/resources/static/screenshots/creategroup.jpg)
+ 
+  - Teacher Create Quiz Page
+ ![createquiz](/quizzical/src/main/resources/static/screenshots/createquiz.jpg)
 
-  - Admin All Teachers Page
-   ![adminallteacherspage](/src/main/resources/static/screenshots/admin_all_teachers.jpg) 
-   
-  - Admin All Teacher Requests aPage
-   ![adminallteacherrequestsspage](/src/main/resources/static/screenshots/admin_all_teacher_requests.jpg) 
+ - Teacher Create Questions for Quiz Page
+ ![createquestions](/quizzical/src/main/resources/static/screenshots/createquestions.jpg)
   
-  - Admin All Students Page
-   ![adminallstudentspage](/src/main/resources/static/screenshots/admin_all_students.jpg) 
+ - View Teacher Groups Page
+ ![teachergroups](/quizzical/src/main/resources/static/screenshots/teachergroups.jpg)
+ 
+ - View Teacher Quizzes Page
+ ![teacherquizzes](/quizzical/src/main/resources/static/screenshots/teacherquizzes.jpg)
+ 
+  - View Teacher - Students Quiz Results Page
+ ![teacherresults](/quizzical/src/main/resources/static/screenshots/teacherresults.jpg)
+ 
+  - View All Students Page
+ ![allstudents](/quizzical/src/main/resources/static/screenshots/allstudents.jpg)
+ 
+ - View Student's Quizzes Page 
+ ![studenttakequiz](/quizzical/src/main/resources/static/screenshots/studenttakequiz.jpg)
+ 
+ - View Student taking Quiz Page 
+ ![studenttakingquiz](/quizzical/src/main/resources/static/screenshots/takingquiz.jpg)
+ 
+  - View Student's Quiz Results Page
+ ![quizresultsstudent](/quizzical/src/main/resources/static/screenshots/quizresultsstudent.jpg)
+ 
+  - View All Teachers Page
+ ![allteachers](/quizzical/src/main/resources/static/screenshots/allteachers.jpg)
+ 
+ 
+  
+ 
