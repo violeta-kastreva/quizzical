@@ -104,62 +104,62 @@ URLs | Description
 Database Diagram Screenshot
  ---
  
- ![database](/src/main/resources/static/screenshots/database.jpg)
+ ![database](/quizzical/src/main/resources/static/screenshots/database.jpg)
  
  
  Website Screenshots
  ---
  
  - Index Page 
- ![indexpage](/src/main/resources/static/screenshots/indexpage.jpg) 
+ ![indexpage](/quizzical/src/main/resources/static/screenshots/indexpage.jpg) 
  
  - Register Page 
- ![registerpage](/src/main/resources/static/screenshots/register.jpg) 
+ ![registerpage](/quizzical/src/main/resources/static/screenshots/register.jpg) 
  
  - Login Page 
-  ![login](/src/main/resources/static/screenshots/login.jpg)    
+  ![login](/quizzical/src/main/resources/static/screenshots/login.jpg)    
  
  - Teacher Home Page 
- ![homepageteacher](/src/main/resources/static/screenshots/teacherhome.jpg)
+ ![homepageteacher](/quizzical/src/main/resources/static/screenshots/teacherhome.jpg)
  
   - Student Home Page 
- ![homepagestudent](/src/main/resources/static/screenshots/studenthome.jpg) 
+ ![homepagestudent](/quizzical/src/main/resources/static/screenshots/studenthome.jpg) 
  
   - View Profile Page
- ![profilepage](/src/main/resources/static/screenshots/teacherprofile.jpg)
+ ![profilepage](/quizzical/src/main/resources/static/screenshots/teacherprofile.jpg)
  
  - Teacher Create Group Page
- ![creategroup](/src/main/resources/static/screenshots/creategroup.jpg)
+ ![creategroup](/quizzical/src/main/resources/static/screenshots/creategroup.jpg)
  
   - Teacher Create Quiz Page
- ![createquiz](/src/main/resources/static/screenshots/createquiz.jpg)
+ ![createquiz](/quizzical/src/main/resources/static/screenshots/createquiz.jpg)
 
  - Teacher Create Questions for Quiz Page
- ![createquestions](/src/main/resources/static/screenshots/createquestions.jpg)
+ ![createquestions](/quizzical/src/main/resources/static/screenshots/createquestions.jpg)
   
  - View Teacher Groups Page
- ![teachergroups](/src/main/resources/static/screenshots/teachergroups.jpg)
+ ![teachergroups](/quizzical/src/main/resources/static/screenshots/teachergroups.jpg)
  
  - View Teacher Quizzes Page
- ![teacherquizzes](/src/main/resources/static/screenshots/teacherquizzes.jpg)
+ ![teacherquizzes](/quizzical/src/main/resources/static/screenshots/teacherquizzes.jpg)
  
   - View Teacher - Students Quiz Results Page
- ![teacherresults](/src/main/resources/static/screenshots/teacherresults.jpg)
+ ![teacherresults](/quizzical/src/main/resources/static/screenshots/teacherresults.jpg)
  
   - View All Students Page
- ![allstudents](/src/main/resources/static/screenshots/allstudents.jpg)
+ ![allstudents](/quizzical/src/main/resources/static/screenshots/allstudents.jpg)
  
  - View Student's Quizzes Page 
- ![studenttakequiz](/src/main/resources/static/screenshots/studenttakequiz.jpg)
+ ![studenttakequiz](/quizzical/src/main/resources/static/screenshots/studenttakequiz.jpg)
  
  - View Student taking Quiz Page 
- ![studenttakingquiz](/src/main/resources/static/screenshots/studenttakingquiz.jpg)
+ ![studenttakingquiz](/quizzical/src/main/resources/static/screenshots/studenttakingquiz.jpg)
  
   - View Student's Quiz Results Page
- ![quizresultsstudent](/src/main/resources/static/screenshots/quizresultsstudent.jpg)
+ ![quizresultsstudent](/quizzical/src/main/resources/static/screenshots/quizresultsstudent.jpg)
  
   - View All Teachers Page
- ![allteachers](/src/main/resources/static/screenshots/allteachers.jpg)
+ ![allteachers](/quizzical/src/main/resources/static/screenshots/allteachers.jpg)
  
  
   
