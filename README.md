@@ -101,12 +101,66 @@ URLs | Description
  */studentprofile* | User Details page - page where a student can see user profile details.
  
 
+Database Diagram Screenshot
+ ---
+ 
+ ![database](/src/main/resources/static/screenshots/database.jpg)
+ 
+ 
+ Website Screenshots
+ ---
+ 
+ - Index Page 
+ ![indexpage](/src/main/resources/static/screenshots/indexpage.jpg) 
+ 
+ - Register Page 
+ ![registerpage](/src/main/resources/static/screenshots/register.jpg) 
+ 
+ - Login Page 
+  ![login](/src/main/resources/static/screenshots/login.jpg)    
+ 
+ - Teacher Home Page 
+ ![homepageteacher](/src/main/resources/static/screenshots/teacherhome.jpg)
+ 
+  - Student Home Page 
+ ![homepagestudent](/src/main/resources/static/screenshots/studenthome.jpg) 
+ 
+  - View Profile Page
+ ![profilepage](/src/main/resources/static/screenshots/teacherprofile.jpg)
+ 
+ - Teacher Create Group Page
+ ![creategroup](/src/main/resources/static/screenshots/creategroup.jpg)
+ 
+  - Teacher Create Quiz Page
+ ![createquiz](/src/main/resources/static/screenshots/createquiz.jpg)
 
-  - Admin All Teachers Page
-   ![adminallteacherspage](/src/main/resources/static/screenshots/admin_all_teachers.jpg) 
-   
-  - Admin All Teacher Requests aPage
-   ![adminallteacherrequestsspage](/src/main/resources/static/screenshots/admin_all_teacher_requests.jpg) 
+ - Teacher Create Questions for Quiz Page
+ ![createquestions](/src/main/resources/static/screenshots/createquestions.jpg)
   
-  - Admin All Students Page
-   ![adminallstudentspage](/src/main/resources/static/screenshots/admin_all_students.jpg) 
+ - View Teacher Groups Page
+ ![teachergroups](/src/main/resources/static/screenshots/teachergroups.jpg)
+ 
+ - View Teacher Quizzes Page
+ ![teacherquizzes](/src/main/resources/static/screenshots/teacherquizzes.jpg)
+ 
+  - View Teacher - Students Quiz Results Page
+ ![teacherresults](/src/main/resources/static/screenshots/teacherresults.jpg)
+ 
+  - View All Students Page
+ ![allstudents](/src/main/resources/static/screenshots/allstudents.jpg)
+ 
+ - View Student's Quizzes Page 
+ ![studenttakequiz](/src/main/resources/static/screenshots/studenttakequiz.jpg)
+ 
+ - View Student taking Quiz Page 
+ ![studenttakingquiz](/src/main/resources/static/screenshots/studenttakingquiz.jpg)
+ 
+  - View Student's Quiz Results Page
+ ![quizresultsstudent](/src/main/resources/static/screenshots/quizresultsstudent.jpg)
+ 
+  - View All Teachers Page
+ ![allteachers](/src/main/resources/static/screenshots/allteachers.jpg)
+ 
+ 
+  
+ 
