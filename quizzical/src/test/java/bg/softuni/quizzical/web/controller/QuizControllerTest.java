@@ -175,14 +175,12 @@ public class QuizControllerTest {
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("user", userDTO);
 
-
         this.mockMvc.perform(get("/myquizzes")
                 .session(session)
                 .with(csrf()))
                 .andExpect(view().name("views/students/myquizzes"));
 
     }
-
 
 
     @Test
