@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/rusevradoslav/DevUni/master/src/main/resources/static/images/5198robot.ico" align="right"/>
 
-# DevUni
+# Quizzical
 
 **Contributor:**
 
