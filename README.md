@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/rusevradoslav/DevUni/master/src/main/resources/static/images/5198robot.ico" align="right"/>
+<img src="/quizzical/blob/master/quizzical/src/main/resources/static/img/logo.png" align="right"/>
 
 # Quizzical
 
@@ -153,7 +153,7 @@ Database Diagram Screenshot
  ![studenttakequiz](/quizzical/src/main/resources/static/screenshots/studenttakequiz.jpg)
  
  - View Student taking Quiz Page 
- ![studenttakingquiz](/quizzical/src/main/resources/static/screenshots/studenttakingquiz.jpg)
+ ![studenttakingquiz](/quizzical/src/main/resources/static/screenshots/takingquiz.jpg)
  
   - View Student's Quiz Results Page
  ![quizresultsstudent](/quizzical/src/main/resources/static/screenshots/quizresultsstudent.jpg)
