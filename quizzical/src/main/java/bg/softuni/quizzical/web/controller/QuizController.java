@@ -34,40 +34,12 @@ public class QuizController {
         this.answersService = answersService;
     }
 
-    private class ListContainer {
-        private List<QuestionDTO> questionDTOS;
-        public ListContainer() {
-            questionDTOS = new ArrayList<>();
-        }
-        public List<QuestionDTO> getQuestionDTOS() {
-            return questionDTOS;
-        }
-        public void setQuestionDTOS(List<QuestionDTO> questionDTOS) {
-            this.questionDTOS = questionDTOS;
-        }
-    }
 
     @GetMapping("/createquestion")
     public String createQuestion(Model model, @RequestParam String quizName, @RequestParam String answerCount, @RequestParam String questionsCount){
-        if (model.getAttribute("questionCreateBindingModel") == null ||  ((ListContainer)model.getAttribute("questionCreateBindingModel")).getQuestionDTOS().isEmpty()
-        ) {
-            List<QuestionDTO> questionDTOS = new ArrayList<>();
-            for (int i = 0; i < Integer.parseInt(questionsCount) ; i++) {
-                QuestionDTO questionDTO = new QuestionDTO();
-                questionDTO.setText("");
-                questionDTO.setQuizName(quizName);
-                for (int j = 0; j < Integer.parseInt(answerCount) ; j++) {
-                    AnswerDTO answerDTO = new AnswerDTO();
-                    answerDTO.setContent("");
-
-                    questionDTO.getAnswers().add(answerDTO);
-                }
-                questionDTOS.add(questionDTO);
-            }
-            ListContainer listContainer = new ListContainer();
-            listContainer.setQuestionDTOS(questionDTOS);
+        if (model.getAttribute("questionCreateBindingModel") == null ||  ((ListContainer)model.getAttribute("questionCreateBindingModel")).getQuestionDTOS().isEmpty()) {
+            ListContainer listContainer = this.questionService.createQuestions(quizName, questionsCount, answerCount);
             model.addAttribute("questionCreateBindingModel",listContainer);
-
         }
         model.addAttribute("pointsDropdown", this.questionService.loadPoints());
 

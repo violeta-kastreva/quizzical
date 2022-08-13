@@ -4,6 +4,7 @@ import bg.softuni.quizzical.model.entity.Answer;
 import bg.softuni.quizzical.model.entity.Question;
 import bg.softuni.quizzical.model.entity.Quiz;
 import bg.softuni.quizzical.model.service.AnswerDTO;
+import bg.softuni.quizzical.model.service.ListContainer;
 import bg.softuni.quizzical.model.service.QuestionDTO;
 import bg.softuni.quizzical.repository.AnswerRepository;
 import bg.softuni.quizzical.repository.QuestionRepository;
@@ -12,6 +13,7 @@ import bg.softuni.quizzical.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -86,4 +88,26 @@ public class QuestionServiceImpl implements QuestionService {
 
         }
     }
+
+    @Override
+    public ListContainer createQuestions(String quizName, String questionsCount, String answerCount) {
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+        for (int i = 0; i < Integer.parseInt(questionsCount); i++) {
+            QuestionDTO questionDTO = new QuestionDTO();
+            questionDTO.setText("");
+            questionDTO.setQuizName(quizName);
+            for (int j = 0; j < Integer.parseInt(answerCount); j++) {
+                AnswerDTO answerDTO = new AnswerDTO();
+                answerDTO.setContent("");
+
+                questionDTO.getAnswers().add(answerDTO);
+            }
+            questionDTOS.add(questionDTO);
+        }
+        ListContainer listContainer = new ListContainer();
+        listContainer.setQuestionDTOS(questionDTOS);
+
+        return listContainer;
+    }
+
 }
