@@ -48,10 +48,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class GroupControllerTest {
 
-    private String quizName;
-    private String answerCount;
-    private String questionCount;
-
     private Role teacher;
     private Role student;
     private Quiz quiz;
@@ -98,10 +94,6 @@ public class GroupControllerTest {
                 .apply(springSecurity())
                 .build();
         modelMapper = new ModelMapper();
-
-        quizName = "NAME";
-        answerCount = "3";
-        questionCount = "2";
 
     }
 

@@ -106,7 +106,6 @@ public class QuizServiceImpl implements QuizService {
         this.quizUserRepository.save(quizUser);
 
 
-
     }
 
     @Override

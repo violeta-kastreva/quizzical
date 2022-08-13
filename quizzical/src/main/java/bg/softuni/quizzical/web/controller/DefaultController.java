@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 public class DefaultController {
 
 
-
     @RequestMapping("/default")
     public String defaultAfterLogin(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_TEACHER")) {

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -66,6 +65,7 @@ public class QuizController {
 
 
     @GetMapping("/createquiz")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     public String createQuiz(Model model, Principal principal){
         if (!model.containsAttribute("quizCreateBindingModel")) {
             model.addAttribute("quizCreateBindingModel", new QuizDTO());
@@ -96,9 +96,42 @@ public class QuizController {
     }
 
     @GetMapping("/createdquizzes")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     public String createdQuizzes(Model model, Principal principal){
         model.addAttribute("quizzes", this.quizService.findAllByEmail(principal.getName()));
         return "views/teachers/createdquizzes";
+    }
+
+
+    @GetMapping("/allresults")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    public String resultsAll(Model model, Principal principal){
+        if (!model.containsAttribute("quizPointsView") ) {
+            List<QuizUserDTO> quizPoints = this.quizService.getAllScoresByUser(principal.getName());
+
+            model.addAttribute("quizPointsView", quizPoints);
+        }
+        return "views/teachers/allresults";
+    }
+
+    @GetMapping("/teacherprofile")
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    public String profileData(Model model, Principal principal){
+        if (!model.containsAttribute("accountInfo") ) {
+            UserAccountDTO userAccountDTO = this.quizService.getAccountInfo(principal.getName());
+            model.addAttribute("accountInfo", userAccountDTO);
+        }
+        return "views/teachers/teacherprofile";
+    }
+
+    @GetMapping("/studentprofile")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    public String profileDataStudent(Model model, Principal principal){
+        if (!model.containsAttribute("accountInfo") ) {
+            UserAccountDTO userAccountDTO = this.quizService.getAccountInfo(principal.getName());
+            model.addAttribute("accountInfo", userAccountDTO);
+        }
+        return "views/students/studentprofile";
     }
 
     @GetMapping("/myquizzes")
@@ -140,37 +173,5 @@ public class QuizController {
         }
         return "views/students/myresults";
     }
-
-    @GetMapping("/allresults")
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
-    public String resultsAll(Model model, Principal principal){
-        if (!model.containsAttribute("quizPointsView") ) {
-            List<QuizUserDTO> quizPoints = this.quizService.getAllScoresByUser(principal.getName());
-
-            model.addAttribute("quizPointsView", quizPoints);
-        }
-        return "views/teachers/allresults";
-    }
-
-    @GetMapping("/teacherprofile")
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
-    public String profileData(Model model, Principal principal){
-        if (!model.containsAttribute("accountInfo") ) {
-            UserAccountDTO userAccountDTO = this.quizService.getAccountInfo(principal.getName());
-            model.addAttribute("accountInfo", userAccountDTO);
-        }
-        return "views/teachers/teacherprofile";
-    }
-
-    @GetMapping("/studentprofile")
-    @PreAuthorize("hasRole('ROLE_STUDENT')")
-    public String profileDataStudent(Model model, Principal principal){
-        if (!model.containsAttribute("accountInfo") ) {
-            UserAccountDTO userAccountDTO = this.quizService.getAccountInfo(principal.getName());
-            model.addAttribute("accountInfo", userAccountDTO);
-        }
-        return "views/students/studentprofile";
-    }
-
 
 }

@@ -61,20 +61,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class QuizControllerTest {
 
-    private int VALID_ID;
-
-    private String VALID_USER_ID;
-
-    private static final String VALID_PASSWORD = "1234";
     private static final String VALID_FIRST_NAME = "Violeta";
     private static final String VALID_LAST_NAME = "Kastreva";
     private static final String VALID_EMAIL = "vili@gmail.com";
 
-    private String quizName;
-    private String answerCount;
-    private String questionCount;
-
-    private static final String VALID_IMAGE_URL = "[random_url]";
     private Role teacher;
     private Role student;
     private Quiz quiz;
@@ -151,8 +141,6 @@ public class QuizControllerTest {
                 .with(csrf()))
                 .andExpect(view().name("views/teachers/createquiz"));
     }
-
-
 
 
     @Test

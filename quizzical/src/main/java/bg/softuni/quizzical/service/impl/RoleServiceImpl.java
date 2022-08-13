@@ -32,7 +32,6 @@ public class RoleServiceImpl implements RoleService {
     public RoleDTO findByAuthority(String authority) throws RoleNotFoundException {
         Role role1 = this.roleRepository.findFirstByAuthority(authority).get();
              return this.modelMapper.map(role1, RoleDTO.class);
-//                .orElseThrow(() -> new RoleNotFoundException("Role not found"))
     }
 
     @Override

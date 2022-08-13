@@ -45,7 +45,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class UserControllerTest {
 
-    private String VALID_USER_ID;
     private static final String VALID_USERNAME = "violeta@abv.bg";
     private static final String VALID_PASSWORD = "1234";
     private static final String VALID_FIRST_NAME = "Violeta";

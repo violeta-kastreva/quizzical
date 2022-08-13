@@ -36,19 +36,11 @@ public class SchoolClassServiceImpl implements SchoolClassService {
     public SchoolClassDTO createSchoolClass(SchoolClassDTO map, String userEmail) {
         SchoolClass schoolClass = new SchoolClass();
         schoolClass.setName(map.getName());
-//        map.getStudents().forEach(s->{
-//            User student = this.userRepository.findFirstByEmail(s).get();
-//            schoolClass.getUsers().add(student);
-//        });
-
-        //User user = this.modelMapper.map(this.userService.findByEmail(userEmail), User.class);
 
         User user = this.userRepository.findFirstByEmail(userEmail).get();
         user.getClasses().add(schoolClass);
 
-      //  this.userRepository.save(user);
         schoolClass.getUsers().add(user);
-
 
         map.getStudents().forEach(s->{
             User student = this.userRepository.findFirstByEmail(s).get();
