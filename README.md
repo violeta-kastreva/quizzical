@@ -23,6 +23,7 @@ Student-users also can keep track of their own results and all information about
 *   Bootstrap
 *   JavaScript
 *   Thymeleaf 
+* Using Lazy Kit Bootstrap template : https://demo.themewagon.com/preview/lazy-kit-is-a-free-bootstrap-4-ui-kit-lazy-kits
 
  
 **Back-End:**
@@ -164,5 +165,5 @@ Database Diagram Screenshot
  ![allteachers](/quizzical/src/main/resources/static/screenshots/allteachers.jpg)
  
  
-  
+  **Using Lazy Kit Bootstrap template** : https://demo.themewagon.com/preview/lazy-kit-is-a-free-bootstrap-4-ui-kit-lazy-kits
  
