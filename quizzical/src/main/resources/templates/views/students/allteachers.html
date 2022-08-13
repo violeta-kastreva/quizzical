@@ -53,38 +53,7 @@
     <div class="row" id="content-wrap">
         <th:block th:include="~{views/fragments/bubbles}"></th:block>
 
-        <div id="side-bar" class="col-12 col-md-2 border-right ml-2">
-            <ul class="navbar-nav text-center">
-                <li class="nav-item active">
-                    <form class="mb-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/homestudent">Home</button>
-                    </form>
-                </li>
-                <li class="nav-item active">
-                    <form class="my-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/myresults">Results</button>
-                    </form>
-                </li>
-                <li class="nav-item active">
-                    <form class="my-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/mygroups">Groups</button>
-                    </form>
-                </li>
-                <li class="nav-item active">
-                    <form class="my-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/myquizzes">Quizzes</button>
-                    </form>
-                </li>
-                <li class="nav-item active">
-                    <form class="my-2">
-                        <button class="btn btn-primary manage-account-btn" formaction="/allteachers">Teachers</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-
-
-
+        <th:block th:include="~{views/fragments/studentsidebar}"></th:block>
 
         <div class="col-12 col-md-9 ml-md-5">
 
