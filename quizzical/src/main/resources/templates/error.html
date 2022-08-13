@@ -80,9 +80,16 @@
             <div class="circle circle-10 bg-danger rotate-circle"></div>
         </div>
 
-
-<h1 class="display-2 text-primary">Error! Something went wrong! Status code: <span th:text="${statusCode}"></span></h1>
-
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-5">
+                    <div class="title text-center pt-5">
+                        <h1 class="display-2 text-primary">Something went wrong! :(<h4>Status code:</h4> <h4 th:text="${statusCode}"></h4></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
 
 
 <footer class="footer-1 bg-light text-dark pt-2">
@@ -104,5 +111,5 @@
         </div>
     </div>
 </footer>
-
+</main>
 </body></html>
