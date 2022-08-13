@@ -10,6 +10,7 @@ import bg.softuni.quizzical.service.QuizService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -156,4 +157,12 @@ public class QuizServiceImpl implements QuizService {
         User user = this.userRepository.findFirstByEmail(name).get();
         return new UserAccountDTO(user.getEmail(), user.getFirstName(), user.getLastName());
     }
+
+
+    @Override
+    @Transactional
+    public void deleteOldQuizzes() {
+        this.quizRepository.deleteQuizzesByDueDateBefore(LocalDate.now());
+    }
+
 }

@@ -6,6 +6,7 @@ import bg.softuni.quizzical.model.service.QuizDTO;
 import bg.softuni.quizzical.model.service.QuizUserDTO;
 import bg.softuni.quizzical.model.service.UserAccountDTO;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,4 +27,7 @@ public interface QuizService {
     List<QuizUserDTO> getAllScoresByUser(String name);
 
     UserAccountDTO getAccountInfo(String name);
+
+    @Transactional
+    void deleteOldQuizzes();
 }
