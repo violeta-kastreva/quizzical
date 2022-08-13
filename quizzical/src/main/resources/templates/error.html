@@ -22,29 +22,22 @@
 </head>
 <body class="index">
 <header>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-white">
-        <a class="navbar-brand text-primary ml-4" href="/hometeacher">
-            Quizzical
-        </a>
-        <button class="navbar-toggler collapsed bg-primary" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-7" aria-controls="navbarNavDropdown-7" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown-7">
-            <ul class="navbar-nav ml-auto mx-2">
-                <li class="nav-item">
-                    <a class="btn btn-outline-primary ml-2" title="Manage" href="/teacherprofile">
-                        <i class="fas fa-address-card"></i>
-                        Profile
-                    </a>
-                </li>
-                <li class="nav-item text-primary">
-                    <form class="form-inline"  method="post">
-                        <a class="btn btn-outline-primary ml-2" th:href="@{/logout}">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
-                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Dgdl0Inw3NFo_uXWyBLYshDaH7WT8L3-dpwGXBCzFN3hhkXR5XtrW-wEtVLxv9sGynkpIURnA6uiNvfTCpS2WAjmk_kG9r8yrDEvnlqVlLAdfdxf-mRvHOcdNYpasV-2rhohe2hPu8Vk-wgXqF7Q9rixrq1xgiMSbRllSKHpPGKqJLDJ9rndhKpIL-WhmTImA"></form>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Quizzical</a>
+
+            <button aria-controls="navbarNavDropdown-7"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    class="navbar-toggler collapsed"
+                    data-target="#navbarNavDropdown-7"
+                    data-toggle="collapse"
+                    type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown-7">
+
+            </div>
         </div>
     </nav>
 </header>
