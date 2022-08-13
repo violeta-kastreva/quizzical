@@ -30,9 +30,15 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.transaction.Transactional;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 
@@ -41,14 +47,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
 public class GroupControllerTest {
-    private int VALID_ID;
-
-    private String VALID_USER_ID;
-
-    private static final String VALID_PASSWORD = "1234";
-    private static final String VALID_FIRST_NAME = "Violeta";
-    private static final String VALID_LAST_NAME = "Kastreva";
-    private static final String VALID_EMAIL = "vili@gmail.com";
 
     private String quizName;
     private String answerCount;
@@ -108,7 +106,7 @@ public class GroupControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "violeta@abf.bg", password = "1234", roles = "TEACHER")
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "TEACHER")
     public void viewGroups() throws Exception {
 
         MockHttpSession session = new MockHttpSession();
@@ -123,7 +121,7 @@ public class GroupControllerTest {
 
 
     @Test
-    @WithMockUser(username = "violeta@abf.bg", password = "1234", roles = "STUDENT")
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "STUDENT")
     public void viewGroupsStudent() throws Exception {
 
         MockHttpSession session = new MockHttpSession();
@@ -137,7 +135,7 @@ public class GroupControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "violeta@abf.bg", password = "1234", roles = "STUDENT")
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "STUDENT")
     public void viewTeachersAsAStudent() throws Exception {
 
         MockHttpSession session = new MockHttpSession();
@@ -152,7 +150,7 @@ public class GroupControllerTest {
 
 
     @Test
-    @WithMockUser(username = "violeta@abf.bg", password = "1234", roles = "TEACHER")
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "TEACHER")
     public void viewStudentsAsATeacher() throws Exception {
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("user", userDTO);
@@ -162,6 +160,34 @@ public class GroupControllerTest {
                 .session(session)
                 .with(csrf()))
                 .andExpect(view().name("views/teachers/allstudents"));
+    }
+
+    @Test
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "TEACHER")
+    public void createGroupShouldRedirectToHome() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("user", userDTO);
+
+        this.mockMvc.perform(post("/creategroup")
+                .param("name", "groupName")
+                .param("students", String.valueOf(List.of(new UserDTO("s", "s", "s@s.fe", "1234", "1234", new HashSet<Role>(Set.of(this.roleRepository.findFirstByAuthority("ROLE_STUDENT").get()))))))
+                .session(session)
+                .with(csrf()))
+                .andExpect(view().name("redirect:/hometeacher"));
+    }
+
+    @Test
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "TEACHER")
+    public void createGroupShouldRedirectToGroup() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("user", userDTO);
+
+        this.mockMvc.perform(post("/creategroup")
+                .param("name", "")
+                .param("students", String.valueOf(List.of(new UserDTO("s", "s", "s@s.fe", "1234", "1234", new HashSet<Role>(Set.of(this.roleRepository.findFirstByAuthority("ROLE_STUDENT").get()))))))
+                .session(session)
+                .with(csrf()))
+                .andExpect(view().name("redirect:/creategroup"));
     }
 
 

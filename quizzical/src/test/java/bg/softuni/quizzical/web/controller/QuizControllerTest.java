@@ -2,10 +2,7 @@ package bg.softuni.quizzical.web.controller;
 
 
 import bg.softuni.quizzical.model.entity.*;
-import bg.softuni.quizzical.model.service.QuestionDTO;
-import bg.softuni.quizzical.model.service.QuizDTO;
-import bg.softuni.quizzical.model.service.SchoolClassDTO;
-import bg.softuni.quizzical.model.service.UserDTO;
+import bg.softuni.quizzical.model.service.*;
 import bg.softuni.quizzical.repository.QuizRepository;
 import bg.softuni.quizzical.repository.RoleRepository;
 import bg.softuni.quizzical.repository.SchoolClassRepository;
@@ -20,6 +17,7 @@ import org.apache.catalina.Group;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,21 +81,6 @@ public class QuizControllerTest {
     private SchoolClass schoolClass;
     private Question question;
     private User author;
-
-//    @NotBlank(message = "Caption is required")
-//    private String caption;
-//
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @Future(message = "Due date should be in the future")
-//    private LocalDate dueDate;
-//
-//    @NotBlank(message = "Quiz should be assigned to a group")
-//    private String schoolClassName;
-//
-//    private int answerCount;
-//
-//    private int questionsCount;
-
     private String VALID_CAPTION = "caption";
     private String VALID_SCHOOL_CLASSNAME = "caption";
     private LocalDate LOCALDATE = LocalDate.of(2023, 1, 8);
@@ -133,11 +116,10 @@ public class QuizControllerTest {
     @MockBean
     private QuestionServiceImpl questionService;
 
-
+    private UserAccountDTO userAccountDTO;
 
     @BeforeEach
     public void setUp() {
-
         teacher = roleRepository.findFirstByAuthority("ROLE_TEACHER").orElse(null);
 
         mockMvc = MockMvcBuilders
@@ -146,16 +128,18 @@ public class QuizControllerTest {
                 .build();
         modelMapper = new ModelMapper();
 
-        quizName = "NAME";
-        answerCount = "3";
-        questionCount = "2";
+        userAccountDTO = new UserAccountDTO();
+        userAccountDTO.setEmail(VALID_EMAIL);
+        userAccountDTO.setFirstName(VALID_FIRST_NAME);
+        userAccountDTO.setLastName(VALID_LAST_NAME);
 
+        when(quizService.getAccountInfo("violeta@abv.bg")).thenReturn(userAccountDTO);
     }
 
 
 
     @Test
-    @WithMockUser(username = "violeta@abf.bg", password = "1234", roles = "TEACHER")
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "TEACHER")
     public void viewQuizzes() throws Exception {
 
         MockHttpSession session = new MockHttpSession();
@@ -168,23 +152,11 @@ public class QuizControllerTest {
                 .andExpect(view().name("views/teachers/createquiz"));
     }
 
-    @Test
-    @WithMockUser(username = "violeta@abf.bg", password = "1234", roles = "STUDENT")
-    public void viewQuizzesStudent() throws Exception {
 
-        MockHttpSession session = new MockHttpSession();
-        session.setAttribute("user", userDTO);
-
-        this.mockMvc.perform(get("/myquizzes")
-                .session(session)
-                .with(csrf()))
-                .andExpect(view().name("views/students/myquizzes"));
-
-    }
 
 
     @Test
-    @WithMockUser(username = "violeta@abf.bg", password = "1234", roles = "TEACHER")
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "TEACHER")
     public void createQuizShouldThrow() throws Exception {
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("user", userDTO);
@@ -198,5 +170,54 @@ public class QuizControllerTest {
                 .session(session)
                 .with(csrf()))
                 .andExpect(view().name("redirect:/createquiz"));
+    }
+
+    @Test
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "STUDENT")
+    public void loadStudentResults() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+
+        this.mockMvc.perform(get("/myresults")
+                .session(session)
+                .with(csrf()))
+                .andExpect(view().name("views/students/myresults"));
+
+    }
+
+    @Test
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "STUDENT")
+    public void loadStudentProfile() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+
+        this.mockMvc.perform(get("/studentprofile")
+                .session(session)
+                .with(csrf()))
+                .andExpect(view().name("views/students/studentprofile"));
+
+    }
+
+    @Test
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "TEACHER")
+    public void loadTeacherResults() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+
+        this.mockMvc.perform(get("/allresults")
+                .session(session)
+                .with(csrf()))
+                .andExpect(view().name("views/teachers/allresults"));
+
+    }
+
+    @Test
+    @WithMockUser(username = "violeta@abv.bg", password = "1234", roles = "TEACHER")
+    public void loadTeacherPage() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("accountInfo", userAccountDTO);
+
+        this.mockMvc.perform(get("/teacherprofile")
+                .session(session)
+                .with(csrf()))
+                .andExpect(view().name("views/teachers/teacherprofile"));
+
     }
 }

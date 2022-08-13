@@ -84,8 +84,6 @@ public class QuestionServiceImpl implements QuestionService {
                 this.answerRepository.save(answer);
             }
 
-
-
         }
     }
 }

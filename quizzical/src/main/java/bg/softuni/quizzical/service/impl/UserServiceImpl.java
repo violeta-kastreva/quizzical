@@ -46,15 +46,6 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 
     @Override
     public UserDTO registerNewUserAccount(UserRegistrationDTO userServiceModel) throws UserAlreadyExistException, RoleNotFoundException {
-//        Converter<String, Set<Role>> mapRoles = new Converter<String, Set<Role>>() {
-//            public Set<Role> convert(MappingContext<String, Set<Role>> context) {
-//                return context.getSource() == null ? null : Collections.singleton(this.);
-//            }
-//        };
-//        modelMapper.addConverter(mapRoles);
-//
-        //UserDTO userDTO = new UserDTO(userServiceModel.getFirstName(), userServiceModel.getLastName(), userServiceModel.getEmail(), userServiceModel.getPassword(), userServiceModel.getConfirmPassword(), userServiceModel.getAuthority());
-       // UserDTO userDTO = this.modelMapper.map(userServiceModel, UserDTO.class);
 
         UserDTO userDTO = new UserDTO();
         userDTO.setFirstName(userServiceModel.getFirstName());
@@ -63,27 +54,10 @@ public class UserServiceImpl implements UserService, UserDetailsService{
         userDTO.setPassword(userServiceModel.getPassword());
         userDTO.setConfirmPassword(userServiceModel.getConfirmPassword());
         userDTO.setAuthorities(Collections.singleton(this.roleService.findAuthorityByName(userServiceModel.getAuthority())));
-//        long count = this.userRepository.count();
-//        if (count == 0) {
-//            authorities.add(this.roleService.findAuthorityByName("ROLE_TEACHER"));
-//
-//        } else {
-//            authorities.add(this.roleService.findAuthorityByName("ROLE_STUDENT"));
-//        }
-//        userDTO.setAuthorities(authorities);
-
 
         return registerNewUser(userDTO);
     }
 
-    @Override
-    public UserDTO createNewAdminAccount(UserDTO adminUser) throws UserAlreadyExistException, RoleNotFoundException {
-
-        Set<Role> authorities = new HashSet<>();
-        authorities.add(this.roleService.findAuthorityByName("ROLE_ADMIN"));
-        adminUser.setAuthorities(authorities);
-        return registerNewUser(adminUser);
-    }
 
     @Override
     public UserDTO findById(Long id) {
@@ -117,8 +91,8 @@ public class UserServiceImpl implements UserService, UserDetailsService{
         User user = this.modelMapper.map(userServiceModel, User.class);
         user.setPassword(bCryptPasswordEncoder.encode(userServiceModel.getPassword()));
 
-
-        return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserDTO.class);
+        User user1 = this.userRepository.saveAndFlush(user);
+        return this.modelMapper.map(user1, UserDTO.class);
     }
 
     private void throwExceptionIfUserExist(String email) {

@@ -21,7 +21,6 @@ public interface UserService {
 
     UserDTO findById(Long id);
 
-    UserDTO createNewAdminAccount(UserDTO map) throws UserAlreadyExistException, RoleNotFoundException;
 
     boolean hasUserSpecifiedRole(Collection<GrantedAuthority> authorities, String role);
 
