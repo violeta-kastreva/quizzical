@@ -95,7 +95,7 @@ public class QuizControllerQuestionsTest {
                 .param("_questionDTOS[1].answers[1].isCorrectAnswer", "on")
                 .param("questionDTOS[1].answers[1].content", "a4"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/hometeacher"));
+                .andExpect(redirectedUrl("/hometeacher?favicon=%2Fimg%2Flogo.png"));
     }
 
     @Test
@@ -133,7 +133,7 @@ public class QuizControllerQuestionsTest {
                 .param("_questionDTOS[1].answers[1].isCorrectAnswer", "on")
                 .param("questionDTOS[1].answers[1].content", "a4"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/homestudent"));
+                .andExpect(redirectedUrl("/homestudent?favicon=%2Fimg%2Flogo.png"));
     }
 
 }
